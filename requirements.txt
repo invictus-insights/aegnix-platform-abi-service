@@ -1,0 +1,4 @@
+-e ../aegnix_sdk
+fastapi
+uvicorn
+sqlite-utils
