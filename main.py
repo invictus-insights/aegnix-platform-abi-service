@@ -19,7 +19,8 @@ log = get_logger("ABI.Service", to_file="logs/abi_service.log")
 # Routers
 app.include_router(admin.router, prefix="/admin", tags=["admin"])
 app.include_router(audit.router, prefix="/audit", tags=["audit"])
-app.include_router(register.router, prefix="/register", tags=["register"])
+# app.include_router(register.router, prefix="/register", tags=["register"])
+app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])
 
 @app.on_event("startup")
