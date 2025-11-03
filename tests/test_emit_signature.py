@@ -1,0 +1,56 @@
+import base64, json
+from fastapi.testclient import TestClient
+from main import app
+from aegnix_abi.keyring import ABIKeyring
+from aegnix_core.envelope import Envelope
+from aegnix_core.crypto import sign_envelope, ed25519_generate
+from aegnix_abi.policy import PolicyEngine
+
+client = TestClient(app)
+
+def test_emit_requires_valid_signature(tmp_path, monkeypatch):
+    """
+    Test Suite: ABI Emit Endpoint
+    -----------------------------
+
+    This test validates the behavior of the `/emit/` FastAPI endpoint
+    responsible for receiving and verifying signed messages ("envelopes")
+    from Atomic Experts (AEs) within the AEGNIX framework.
+
+    Focus:
+        • Ensures valid envelopes with proper signatures are accepted.
+        • Confirms policy and trust checks succeed under normal conditions.
+        • Uses FastAPI's in-memory TestClient to simulate HTTP requests.
+
+    Key components used in this test:
+        - ABIKeyring: Stores and verifies trusted AE public keys.
+        - PolicyEngine: Defines publishing rules for subjects and labels.
+        - Envelope: Message container for signed payloads.
+        - ed25519_generate / ed25519_sign: Crypto utilities for AE identity.
+
+    Run this test with:
+        pytest -v tests/test_emit_valid_signature.py
+    """
+    # Trust key
+    kr = ABIKeyring("db/abi_state.db")
+    priv, pub = ed25519_generate()
+    pub_b64 = base64.b64encode(pub).decode()
+    kr.add_key("fusion_ae", pub_b64)
+
+    # Allow policy
+    p = PolicyEngine()
+    p.allow("fusion.topic", publisher="fusion_ae", labels=["default"])
+
+    # Build envelope and sign
+    env = Envelope.make(
+        producer="fusion_ae",
+        subject="fusion.topic",
+        payload={"track_id":"ABC"},
+        labels=["default"],
+        key_id=pub_b64
+    )
+    # env.sig = ed25519_sign(env.to_bytes(), priv)
+    env = sign_envelope(env, priv, pub_b64)
+
+    r = client.post("/emit/", json=env.to_dict())
+    assert r.status_code == 200, r.text

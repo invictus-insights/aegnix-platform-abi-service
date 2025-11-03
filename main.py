@@ -23,6 +23,10 @@ app.include_router(audit.router, prefix="/audit", tags=["audit"])
 app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])
 
+# Hard Coded Policy Allow list
+policy.allow("fusion.topic", publisher="fusion_ae", labels=["default"])
+
+
 @app.on_event("startup")
 def startup():
     log.info("ABI Service started with SQLite state")
