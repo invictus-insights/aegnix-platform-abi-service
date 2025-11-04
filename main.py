@@ -3,7 +3,7 @@ from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.admission import AdmissionService
 from aegnix_abi.policy import PolicyEngine
 from aegnix_core.logger import get_logger
-from routes import admin, audit, register, emit
+from routes import admin, audit, register, emit, subscribe
 import os
 
 app = FastAPI(title="AEGNIX ABI Service")
@@ -22,13 +22,16 @@ app.include_router(audit.router, prefix="/audit", tags=["audit"])
 # app.include_router(register.router, prefix="/register", tags=["register"])
 app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])
+app.include_router(subscribe.router, prefix="/subscribe", tags=["subscribe"])
 
 # Hard Coded Policy Allow list
 policy.allow("fusion.topic", publisher="fusion_ae", labels=["default"])
 
 
 @app.on_event("startup")
-def startup():
+async def startup():
+    import asyncio
+    subscribe.set_main_loop(asyncio.get_running_loop())
     log.info("ABI Service started with SQLite state")
 
 @app.get("/healthz")

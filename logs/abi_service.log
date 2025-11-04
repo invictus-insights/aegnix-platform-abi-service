@@ -62,3 +62,52 @@
 {"ts": "2025-11-02T16:34:14Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
 {"ts": "2025-11-03T00:52:17Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
 {"ts": "2025-11-03T01:25:37Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:10:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:13:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:14:32Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:37:00Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:38:18Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:39:16Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:41:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:42:18Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:55:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T15:55:50Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T17:12:24Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T17:28:21Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T17:29:01Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T17:30:15Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T17:35:22Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T23:35:00Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T23:53:45Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-03T23:53:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T01:06:20Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T15:53:30Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T15:54:44Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T15:59:25Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T16:03:47Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T21:27:59Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T21:34:56Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T21:40:33Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T21:43:50Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T21:48:22Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:01:09Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:06:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:26:31Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:29:16Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:34:21Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:34:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:45:23Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:53:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T22:53:38Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:53:40Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-11-04T22:55:51Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T22:58:03Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T22:58:03Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T22:58:05Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-11-04T23:07:28Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T23:07:34Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T23:07:41Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T23:07:51Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T23:07:56Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-04T23:07:56Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-04T23:07:57Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}

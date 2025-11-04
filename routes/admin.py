@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Body
 from aegnix_abi.keyring import ABIKeyring
+from aegnix_abi.policy import PolicyEngine
 
 
+policy = PolicyEngine()
 router = APIRouter()
 keyring = ABIKeyring(db_path="db/abi_state.db")
 
@@ -26,3 +28,22 @@ def revoke_key(ae_id: str = Body(...)):
     """Revoke a key from the ABI keyring."""
     keyring.revoke_key(ae_id)
     return {"status": "revoked", "ae_id": ae_id}
+
+
+@router.get("/policy")
+def list_policy():
+    return {"rules": policy.rules}
+
+
+@router.post("/policy/allow")
+def policy_allow(subject: str = Body(...), publisher: str | None = Body(default=None),
+                 subscriber: str | None = Body(default=None), labels: list[str] | None = Body(default=None)):
+    policy.allow(subject, publisher=publisher, subscriber=subscriber, labels=labels or [])
+    return {"status": "ok"}
+
+
+@router.post("/policy/revoke")
+def policy_revoke(subject: str = Body(...), publisher: str | None = Body(default=None),
+                  subscriber: str | None = Body(default=None)):
+    policy.revoke(subject, publisher=publisher, subscriber=subscriber)
+    return {"status": "ok"}

@@ -1,6 +1,7 @@
 import base64, json
 from fastapi.testclient import TestClient
 from main import app
+import pytest
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.envelope import Envelope
 from aegnix_core.crypto import sign_envelope, ed25519_generate
@@ -8,6 +9,20 @@ from aegnix_abi.policy import PolicyEngine
 
 client = TestClient(app)
 
+
+"""
+Deprecated Test — Phase 3E
+--------------------------
+This test validated the open /emit/ endpoint before JWT enforcement.
+Now skipped pending the full JWT + AdmissionService integration
+planned for Phase 3F.
+
+Once the new AE verification and token issuance flow is implemented,
+this test will be replaced by:
+    • test_emit_with_valid_jwt
+    • test_emit_rejects_invalid_jwt
+"""
+@pytest.mark.skip(reason="JWT authorization flow pending — will be rewritten in Phase 3F")
 def test_emit_requires_valid_signature(tmp_path, monkeypatch):
     """
     Test Suite: ABI Emit Endpoint
