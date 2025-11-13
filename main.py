@@ -11,6 +11,8 @@ app = FastAPI(title="AEGNIX ABI Service")
 os.makedirs("logs", exist_ok=True)
 
 keyring = ABIKeyring(db_path="db/abi_state.db")
+emit.keyring = keyring  # inject the shared instance
+
 admission = AdmissionService(keyring)
 policy = PolicyEngine()
 log = get_logger("ABI.Service", to_file="logs/abi_service.log")

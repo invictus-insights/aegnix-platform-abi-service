@@ -1,113 +1,161 @@
-{"ts": "2025-11-01T02:49:04Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T02:52:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T02:54:36Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:04:55Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:19:15Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:19:34Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:19:40Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:20:22Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:20:28Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T14:59:07Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:01:41Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:08:55Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:09:01Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'str' object has no attribute 'get'"}"}
-{"ts": "2025-11-01T15:11:57Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'str' object has no attribute 'get'"}"}
-{"ts": "2025-11-01T15:14:22Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:15:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:22:01Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:22:09Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:24:16Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:26:03Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:26:45Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:26:47Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:26:54Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:27:38Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:29:33Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T15:29:41Z", "level": "INFO", "name": "ABI.Emit", "msg": "[LOCAL DISPATCH] fusion.topic -> {'schema_ver': '1.0', 'msg_id': '5f1f8b17736342c294da6ac6752834d0', 'corr_id': None, 'ts': '2025-11-01T15:29:39.034751Z'"}
-{"ts": "2025-11-01T15:29:41Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_processed', 'subject': 'fusion.topic', 'producer': 'fusion_ae', 'transports': ['local']}"}
-{"ts": "2025-11-01T15:30:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T18:28:43Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T18:33:12Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T18:33:15Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T18:38:02Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T19:01:40Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T19:31:36Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T19:38:50Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T19:39:04Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T19:59:28Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T20:13:29Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T20:30:37Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T20:30:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T21:58:36Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-01T22:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T13:41:44Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:02:19Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:06:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:27:33Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:30:08Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:31:28Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:35:03Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T14:38:35Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T15:51:01Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T15:51:12Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T15:52:24Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T15:52:33Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "type object 'Envelope' has no attribute 'from_dict'"}"}
-{"ts": "2025-11-02T15:55:47Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T15:55:56Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "ed25519_verify() got an unexpected keyword argument 'pub_b64'"}"}
-{"ts": "2025-11-02T15:58:56Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T16:00:02Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T16:00:10Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T16:00:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T16:01:04Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-02T16:34:14Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T00:52:17Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T01:25:37Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:10:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:13:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:14:32Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:37:00Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:38:18Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:39:16Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:41:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:42:18Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:55:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T15:55:50Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T17:12:24Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T17:28:21Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T17:29:01Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T17:30:15Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T17:35:22Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T23:35:00Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T23:53:45Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-03T23:53:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T01:06:20Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T15:53:30Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T15:54:44Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T15:59:25Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T16:03:47Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T21:27:59Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T21:34:56Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T21:40:33Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T21:43:50Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T21:48:22Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:01:09Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:06:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:26:31Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:29:16Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:34:21Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:34:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:45:23Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:53:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T22:53:38Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:53:40Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
-{"ts": "2025-11-04T22:55:51Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T22:58:03Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T22:58:03Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T22:58:05Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
-{"ts": "2025-11-04T23:07:28Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T23:07:34Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T23:07:41Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T23:07:51Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T23:07:56Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
-{"ts": "2025-11-04T23:07:56Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
-{"ts": "2025-11-04T23:07:57Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-11-05T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-05T23:40:12Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-06T00:08:51Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-06T00:08:59Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-06T00:08:59Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-11-06T00:09:00Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-11-06T18:59:13Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:24:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e2d6165222c226c'}"}
+{"ts": "2025-11-12T23:24:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e2d6165222c226c'}"}
+{"ts": "2025-11-12T23:24:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e2d6165222c226c'}"}
+{"ts": "2025-11-12T23:33:42Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:33:42Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'Envelope' object is not subscriptable"}"}
+{"ts": "2025-11-12T23:33:42Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:33:42Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'Envelope' object is not subscriptable"}"}
+{"ts": "2025-11-12T23:33:42Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:35:53Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:35:56Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'Envelope' object is not subscriptable"}"}
+{"ts": "2025-11-12T23:35:56Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:35:56Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'Envelope' object is not subscriptable"}"}
+{"ts": "2025-11-12T23:35:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 125, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 129, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:38:14Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:08Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:45:15Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 125, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 129, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:45:15Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 125, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 129, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-12T23:45:21Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-12T23:48:17Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:48:22Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:48:33Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:48:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:48:59Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-12T23:54:37Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:03:35Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:06:30Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:07:12Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:07:25Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:23:07Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:23:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:23:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:23:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:23:40Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:25:23Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:25:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:25:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 129, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:25:40Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 125, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T00:34:33Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:34:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:34:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:34:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:36:15Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:36:23Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:36:29Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:36:29Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:36:29Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:45:53Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:46:33Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with SQLite state"}
+{"ts": "2025-11-13T00:46:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '+h7vhWIKyxEKa5Hb', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:46:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:46:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '+h7vhWIKyxEKa5Hb', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:46:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:46:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '+h7vhWIKyxEKa5Hb', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:46:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'GJ3hK5N75Gzi/MFO', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'GJ3hK5N75Gzi/MFO', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'GJ3hK5N75Gzi/MFO', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:54:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '8r/CKNRUL6ee6kyT', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '8r/CKNRUL6ee6kyT', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': '8r/CKNRUL6ee6kyT', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T00:55:10Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'D45HTeQ3YbO6MOYH', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'D45HTeQ3YbO6MOYH', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'D45HTeQ3YbO6MOYH', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:00:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'DzO+s/cy0I/Vohns', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '616ddf36fc5d57602d7e97fd3023831b3f9578c2cbe6c69e006fcfa72f013257'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'DzO+s/cy0I/Vohns', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 300, 'sig_len': 64, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '2f0f6d49cd762492829db753a161792e290e437d63ccfff6da1905d49f6f3c98'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'DzO+s/cy0I/Vohns', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 296, 'sig_len': 7, 'first_bytes': '7b22616164223a6e756c6c2c22636f72725f6964223a6e756c6c2c226b65795f6964223a22667573696f6e5f6165222c226c'}"}
+{"ts": "2025-11-13T01:04:02Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': 'a30f85b2a0111030a8aa3cc5f745deb5049b000971231874b9dbf9adca3b1aa8'}"}
+{"ts": "2025-11-13T01:06:58Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'abjEC/mEePLdhUNX', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:06:58Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:06:58Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:06:58Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 101, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:06:58Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'abjEC/mEePLdhUNX', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 105, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': 'a8ce0aa92e216571152cec70ff609e0c200bcfb3d6bcb575e4a507fab140207c'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 105, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'emit_error', 'error': "'NoneType' object has no attribute 'is_closed'"}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'abjEC/mEePLdhUNX', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:06:59Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'zM/eCsop56OpF4+g', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 101, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'zM/eCsop56OpF4+g', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 105, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': 'a8ce0aa92e216571152cec70ff609e0c200bcfb3d6bcb575e4a507fab140207c'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 105, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'zM/eCsop56OpF4+g', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:13:20Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'Nv38sd+Ge0SBHm/L', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 101, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'Nv38sd+Ge0SBHm/L', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 105, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': 'a8ce0aa92e216571152cec70ff609e0c200bcfb3d6bcb575e4a507fab140207c'}"}
+{"ts": "2025-11-13T01:15:12Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 105, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:15:13Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'Nv38sd+Ge0SBHm/L', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:13Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:13Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'sxrFJ8zcT2Q0bkoW', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 101, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'sxrFJ8zcT2Q0bkoW', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 105, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': 'a8ce0aa92e216571152cec70ff609e0c200bcfb3d6bcb575e4a507fab140207c'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'classified.data', 'to_sign_bytes_len': 105, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'sxrFJ8zcT2Q0bkoW', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:15:27Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'f+Og57lSDrxDsahg', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fused.track', 'to_sign_bytes_len': 101, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c61'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'fusion_ae', 'db_path': '?', 'pubkey_b64_prefix': 'f+Og57lSDrxDsahg', 'rec_status': 'trusted'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 101, 'sig_len': 7, 'first_bytes': '7b226c6162656c73223a5b22435549225d2c227061796c6f6164223a7b226c6174223a33382e372c226c6f6e223a2d313034'}"}
+{"ts": "2025-11-13T01:26:57Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '5a61544a7252a782f50e01abc50947c0bc9937112862dd6b6a0f61afe7df80af'}"}

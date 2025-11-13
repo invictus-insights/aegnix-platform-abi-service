@@ -67,22 +67,3 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
     except Exception as e:
         log.error({"event": "verify_error", "ae_id": ae_id, "error": str(e)})
         raise HTTPException(status_code=500, detail=str(e))
-
-# @router.post("/verify")
-# def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
-#     ok, reason = admission.verify_response(ae_id, signed_nonce_b64)
-#     log.info({"event":"verify_result","ae_id":ae_id,"verified":ok})
-#     if not ok:
-#         return {"ae_id": ae_id, "verified": False, "reason": reason}
-#
-#     # roles from keyring (string; optional)
-#     rec = keyring.get_key(ae_id)
-#     roles = getattr(rec, "roles", "") if rec else ""
-#
-#     now = int(time.time())
-#     token = jwt.encode(
-#         {"sub": ae_id, "roles": roles, "iat": now, "exp": now + JWT_TTL},
-#         JWT_SECRET,
-#         algorithm="HS256"
-#     )
-#     return {"ae_id": ae_id, "verified": True, "reason": "verified", "grant": token}

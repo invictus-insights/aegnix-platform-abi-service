@@ -91,12 +91,22 @@ async def _broadcast_to_sse(topic: str, payload: dict):
 
 def _safe_broadcast(topic: str, message: dict):
     """Thread-safe bridge from EventBus to the FastAPI loop."""
-    if _main_loop.is_closed():
+    global _main_loop
+    if _main_loop is None or _main_loop.is_closed():
+        # Skip if no loop (e.g., during pytest)
         return
-    # Schedule coroutine in the FastAPI event loop
     _main_loop.call_soon_threadsafe(
         lambda: asyncio.create_task(_broadcast_to_sse(topic, message))
     )
+
+# def _safe_broadcast(topic: str, message: dict):
+#     """Thread-safe bridge from EventBus to the FastAPI loop."""
+#     if _main_loop.is_closed():
+#         return
+#     # Schedule coroutine in the FastAPI event loop
+#     _main_loop.call_soon_threadsafe(
+#         lambda: asyncio.create_task(_broadcast_to_sse(topic, message))
+#     )
 
 # Register as a proper async handler so bus.publish can await it
 

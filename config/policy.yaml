@@ -1,0 +1,14 @@
+subjects:
+  fused.track:
+    pubs: [fusion_ae]
+    subs: [advisory_ae, roe_ae]
+    labels: [CUI]
+
+  roe.result:
+    pubs: [roe_ae]
+    subs: [advisory_ae]
+
+  classified.data:
+    pubs: []
+    subs: []
+    labels: [SECRET]
