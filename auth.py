@@ -67,6 +67,7 @@ from fastapi import HTTPException
 # Secret key used for signing and verifying JWTs.
 # Loaded from environment
 SECRET = os.getenv("ABI_JWT_SECRET", "change_me")
+print("ABI_JWT_SECRET at startup =", SECRET)
 
 
 # ---------------------------------------------------------------------
@@ -85,7 +86,7 @@ def issue_token(ae_id: str, session_id: str, ttl_seconds: int = 86400):
          str: Encoded JWT string.
 
      Example:
-         >>> token = issue_token("fusion-ae", "uuid-1234")
+         >>> token = issue_token("fusion_ae", "uuid-1234")
          >>> print(token)
          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
      """

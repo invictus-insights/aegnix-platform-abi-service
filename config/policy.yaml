@@ -12,3 +12,8 @@ subjects:
     pubs: []
     subs: []
     labels: [SECRET]
+
+  fusion.topic:
+    pubs: [fusion_ae]
+    subs: []
+    labels: [default]

@@ -96,10 +96,31 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
             raise HTTPException(status_code=401, detail="Missing bearer token")
 
         token = authorization.split(" ", 1)[1]
+
         try:
-            claims = verify_token(token)  # shared auth.py helper
-        except jwt.PyJWTError as e:
-            raise HTTPException(status_code=401, detail=f"Invalid token: {e}")
+            claims = verify_token(token)
+
+            log.info({
+                "event": "jwt_ok",
+                "sub": claims.get("sub"),
+                "sid": claims.get("sid"),
+            })
+
+        except HTTPException as e:
+            log.error({
+                "event": "jwt_invalid",
+                "detail": e.detail,
+                # Just a prefix
+                "token_prefix": token[:32],
+            })
+            raise  # propagate token expired / invalid
+        except Exception as e:
+            log.exception({"event": "jwt_decode_error"})
+            raise HTTPException(status_code=401, detail="Invalid token")
+        # try:
+        #     claims = verify_token(token)  # shared auth.py helper
+        # except jwt.PyJWTError as e:
+        #     raise HTTPException(status_code=401, detail=f"Invalid token: {e}")
 
         # --- Parse & rebuild envelope --------------------------------
         raw = await req.json()
