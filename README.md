@@ -1,132 +1,269 @@
-# AEGNIX ABI Service
+# AEGNIX ABI Service (Phase 3F → 3G)
 
-The **AEGNIX Agent Bridge Interface (ABI) Service** is the secure admission and coordination layer for the **AEGNIX Swarm Mesh**. It governs how *Atomic Experts (AEs)* authenticate, publish, subscribe, and interoperate within trusted agentic networks.
+The **AEGNIX Agent Bridge Interface (ABI) Service** is the trusted, cryptographically enforced admission and coordination layer for the **AEGNIX Swarm Mesh**.
 
-It provides cryptographic admission control, event bus routing, live streaming via Server-Sent Events (SSE)/WebSocket, and policy-based message authorization — serving as the **central nervous system** for AEGNIX operations.
+It ensures that all **Atomic Experts (AEs)** entering the swarm are:
 
----
+* **Authenticated** (dual-crypto admission + JWT session grant)
+* **Authorized** (static + dynamic policy engine)
+* **Trusted** (keyring-validated ed25519 public keys)
+* **Audited** (full non-repudiation logs)
+* **Coordinated** (EventBus + SSE real-time developer routing)
 
-## Overview
-
-| Component   | Description                                                                              |
-| ----------- | ---------------------------------------------------------------------------------------- |
-| **main.py** | FastAPI entrypoint — loads routes, initializes Keyring, Policy, and Admission modules.   |
-| **bus.py**  | In-memory async EventBus with pub/sub and decorator-based message routing.               |
-| **routes/** | Contains all API route handlers for registration, emission, audit, and SSE subscription. |
-| **db/**     | SQLite state storage (keyring, trust records).                                           |
-| **logs/**   | Centralized logs for ABI service and audit events.                                       |
-| **tests/**  | Pytest suite covering registration, emit validation, and bus-to-SSE loopback.            |
+This service is the **central nervous system** of the AEGNIX platform, governing every message, every AE, every capability, and every trust relationship.
 
 ---
 
-## Key Modules
+# 🔐 Core Responsibilities
 
-### Admission Service (`aegnix_abi.admission`)
+## 1. **Admission (ed25519 Challenge-Response)**
 
-Handles the dual-crypto handshake (`who_is_there`) for AEs joining the swarm:
+* AE sends `/register`
+* ABI returns a **nonce**
+* AE signs nonce with its ed25519 private key
+* ABI verifies signature, marks AE as **trusted**, stores key in keyring
+* ABI issues a **JWT session token**
 
-1. Issues nonce challenges.
-2. Verifies signed responses.
-3. Updates keyring trust status.
+```plantuml
+@startuml
+participant AE
+participant ABI
 
-### Keyring (`aegnix_abi.keyring`)
-
-Stores and manages AE public keys, trust states, and revocation in SQLite.
-
-### Policy Engine (`aegnix_abi.policy`)
-
-Controls which subjects and labels an AE can publish or subscribe to.
-
-### Audit Logger (`aegnix_abi.audit`)
-
-Writes signed event envelopes to log files or Pub/Sub for non-repudiation.
-
-### Event Bus (`bus.py`)
-
-Lightweight async bus bridging internal modules, enabling:
-
-* `bus.publish(topic, message)` → In-memory fan-out
-* Decorator-style subscriptions via `@bus.subscribe("topic")`
-
-### SSE Bridge (`routes/subscribe.py`)
-
-Implements `/subscribe/{topic}` endpoint for real-time event streaming to AE developers.
-Validated under **Phase 3E** with loopback tests ensuring bus → SSE continuity.
+AE -> ABI: POST /register
+ABI -> AE: nonce
+AE -> ABI: POST /verify {signed_nonce}
+ABI -> AE: 200 OK + JWT (session grant)
+@enduml
+```
 
 ---
 
-## Directory Structure
+## 2. **Policy Enforcement (Static + Dynamic Merge)**
+
+* Static `policy.yaml` defines hard boundaries
+* AEs may optionally declare dynamic capabilities:
+
+  * publishes: []
+  * subscribes: []
+* ABI merges both into a unified **Effective Policy**
+* Hot-reload watcher updates policies in real time
+
+```plantuml
+@startuml
+skinparam style strictuml
+
+folder "Static Policy YAML" {
+  [policy.yaml]
+}
+
+node "SQLite" {
+  [Dynamic Capabilities]
+}
+
+component "PolicyEngine" {
+  [Merge Logic]
+}
+
+[policy.yaml] --> [Merge Logic]
+[Dynamic Capabilities] --> [Merge Logic]
+[Merge Logic] --> [Effective Policy]
+
+@enduml
+```
+
+---
+
+## 3. **Verified Emission (/emit)**
+
+Every AE message must:
+
+* Include a **valid JWT** (`Bearer <grant>`)
+* Be **signed** (ed25519) over the Envelope structure
+* Pass **policy.can_publish()**
+* Use a **trusted key** stored in keyring
+* Match token `sub == producer`
+
+```plantuml
+@startuml
+participant AE
+participant ABI
+participant Bus
+
+AE -> ABI: POST /emit (Envelope + JWT)
+ABI -> ABI: Verify JWT
+ABI -> ABI: Verify policy
+ABI -> ABI: Verify ed25519 signature
+ABI -> Bus: publish(subject, payload)
+ABI -> AE: {status: accepted}
+@enduml
+```
+
+---
+
+# 📦 Directory Structure
 
 ```
 abi_service/
-├── main.py                # FastAPI application entrypoint
-├── bus.py                 # In-memory event bus
-├── routes/                # Modular route handlers
+├── main.py
+├── bus.py
+├── routes/
 │   ├── admin.py
 │   ├── audit.py
 │   ├── emit.py
 │   ├── register.py
-│   └── subscribe.py
-├── db/                    # Persistent keyring storage
+│   ├── subscribe.py
+│   └── capabilities.py
+├── config/
+│   └── policy.yaml
+├── db/
 │   └── abi_state.db
-├── logs/                  # Service + audit logs
+├── logs/
 │   ├── abi_service.log
 │   └── abi_audit.log
-└── tests/                 # Full test suite
+└── tests/
     ├── test_register_flow.py
-    ├── test_emit_signature.py
+    ├── test_emit_verified.py
+    ├── test_policy_dynamic_merge.py
     └── test_subscribe_loopback.py
 ```
 
 ---
 
-## Running Tests
+# 🔑 Key Modules
 
-Run all tests locally (ABI + SSE + Policy):
+## **AdmissionService**
+
+Dual-crypto admission flow:
+
+* Nonce challenge
+* ed25519 verification
+* Keyring trust set
+* JWT grant issued
+
+## **Keyring (SQLite)**
+
+Stores:
+
+* AE public key
+* status (untrusted → trusted → revoked)
+* roles (future)
+* prevents duplicates (Phase 3G+)
+
+## **PolicyEngine**
+
+Merges:
+
+* **Static** policy from YAML
+* **Dynamic** AE capabilities from SQLite
+
+Enforces:
+
+* can_publish(ae, subject)
+* can_subscribe(ae, subject)
+
+## **Capabilities Route (NEW Phase 3G)**
+
+AEs may declare:
+
+```json
+{
+  "publishes": ["fusion.topic"],
+  "subscribes": ["roe.result"],
+  "meta": {}
+}
+```
+
+JWT-verified → stored → hot-reload updates Effective Policy.
+
+## **SSE /subscribe**
+
+Used for developer debugging & real-time mesh visibility.
+
+## **Emit Route**
+
+Full verification chain:
+
+1. JWT
+2. Envelope schema
+3. Policy
+4. Keyring trust
+5. Signature
+6. Dispatch to event bus
+7. Local SSE fan-out
+
+---
+
+# 🚀 Test Suite
+
+Run:
 
 ```bash
-pytest -v -s --log-cli-level=DEBUG tests/
-
+pytest -v -s --log-cli-level=DEBUG
 ```
 
-Expected output (Phase 3E verified):
+Current status:
+
+* **All tests passing** (Phase 3F + dynamic policy)
+
+---
+
+# 🔧 Environment
+
+Set JWT secret:
+
+```powershell
+$env:ABI_JWT_SECRET="mydevsecret123"
+```
+
+DB defaults:
 
 ```
-============================================================
-3 passed, 0 failed, all-green
-============================================================
+db/abi_state.db
+```
+
+Logs:
+
+```
+logs/abi_service.log
+logs/abi_audit.log
 ```
 
 ---
 
-## Developer Notes
+# 📅 Roadmap
 
-* Default storage → SQLite (`db/abi_state.db`)
-* Default transports → In-memory EventBus and SSE streaming
-* Fully interoperable with **AE SDK v0.3.6**
-* Designed for modular extension to Kafka / GCP Pub/Sub
+## ✅ Completed (Phase 3F)
+
+* Verified /emit (JWT + policy + trust + signature)
+* Dual-crypto admission
+* Keyring integration
+* EventBus + SSE loopback
+* Hot reload for static policy & dynamic caps
+* AE SDK integration
+
+## 🟦 Phase 3G (CURRENT)
+
+* AE-declared publishes/subscribes
+* Dynamic merge into Effective Policy
+* Unknown subject rejection
+* Audit trails for capability change
+
+## 🟧 Phase 4
+
+* JWT refresh tokens
+* Multi-transport mesh (Kafka, Pub/Sub)
+* AE revocation propagation
+
+## 🟪 Phase 5
+
+* Federated ABIs
+* Cross-domain trust
+* Purpose Policy Overlay (Reflection Layer)
 
 ---
 
-## Definition of Done (Phase 3E)
+# 📘 Version
 
-* [x] Keyring + Admission handshake validated
-* [x] Policy enforcement functional
-* [x] SSE endpoint (`/subscribe/{topic}`) verified via bus loopback
-* [x] All tests passing (ABI + AE SDK)
-* [ ] JWT grant + verified `/emit` endpoint (Phase 3F)
-
----
-
-## Next Steps
-
-**Phase 3F** — JWT-based emit verification and session token issuance
-**Phase 4** — Kafka adapter and distributed event policy
-**Phase 5** — ABI federation + UIX mesh orchestration
-
----
-
-**Repository:** `github.com/invictus-insights/abi_service`
-**Author:** Invictus Insights R&D
-**Version:** 0.3.6 (Phase 3E All Green)
-**License:** Proprietary / Pending Patent Filing
+**ABI Service:** v0.3.8 — Phase 3F/3G Combined
+**License:** Proprietary (Patent filings pending)
+**Authors:** Invictus Insights R&D (Aegnix Framework)

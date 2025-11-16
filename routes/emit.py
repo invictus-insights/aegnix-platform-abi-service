@@ -131,7 +131,8 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
             raise HTTPException(status_code=403, detail="Producer mismatch with token")
 
         # --- Policy Enforcement -------------------------------------
-        if not policy.can_publish(env.subject, env.producer):
+        if not policy.can_publish(env.producer, env.subject):
+        # if not policy.can_publish(env.subject, env.producer):
             audit.log_event(EVENT_POLICY_DENY, {
                 "producer": env.producer,
                 "subject": env.subject,
