@@ -30,16 +30,24 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
     """
     Verify AE’s signed response to challenge and issue a session grant.
 
-    1. Confirm AE exists and is trusted in keyring.
+    1. Confirm AE exists (and is not revoked) in keyring.
     2. Validate signature against stored nonce via AdmissionService.
     3. Issue a short-lived JWT grant if verified.
+
+    Roles:
+        - Read from keyring.rec.roles if present.
+        - Default to "producer" if empty.
+        - Roles are metadata for now; policy remains the true gatekeeper.
     """
     try:
         # Retrieve AE key record
         rec = keyring.get_key(ae_id)
-        if not rec or rec.status != "trusted":
-            log.warning(f"[VERIFY] AE '{ae_id}' not trusted or not found")
-            raise HTTPException(status_code=403, detail="AE not trusted")
+        if not rec or rec.status == "revoked":
+            log.warning(f"[VERIFY] AE '{ae_id}' not found or revoked")
+            raise HTTPException(status_code=403, detail="AE not allowed")
+        # if not rec or rec.status != "trusted":
+        #     log.warning(f"[VERIFY] AE '{ae_id}' not trusted or not found")
+        #     raise HTTPException(status_code=403, detail="AE not trusted")
 
         # Validate signature through AdmissionService
         ok, reason = admission.verify_response(ae_id, signed_nonce_b64)
@@ -47,8 +55,8 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
         if not ok:
             return {"ae_id": ae_id, "verified": False, "reason": reason}
 
-        # Prepare role(s)
-        roles = getattr(rec, "roles", "") or "publisher"
+        # Roles from keyring
+        roles = getattr(rec, "roles", "") or "producer"
 
         # Issue short-lived JWT session token
         now = int(time.time())

@@ -99,12 +99,20 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
 
         try:
             claims = verify_token(token)
+            ae_id = claims.get("sub")
+            roles = claims.get("roles", "")
 
             log.info({
                 "event": "jwt_ok",
-                "sub": claims.get("sub"),
-                "sid": claims.get("sid"),
+                "sub": ae_id,
+                "roles": roles,
             })
+
+            # log.info({
+            #     "event": "jwt_ok",
+            #     "sub": claims.get("sub"),
+            #     "sid": claims.get("sid"),
+            # })
 
         except HTTPException as e:
             log.error({
@@ -127,17 +135,25 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         env = Envelope.from_dict(raw)
 
         # Ensure token subject (sub) matches envelope producer
-        if env.producer != claims.get("sub"):
+        if env.producer != ae_id:
             raise HTTPException(status_code=403, detail="Producer mismatch with token")
+        # if env.producer != claims.get("sub"):
+        #     raise HTTPException(status_code=403, detail="Producer mismatch with token")
 
         # --- Policy Enforcement -------------------------------------
         if not policy.can_publish(env.producer, env.subject):
-        # if not policy.can_publish(env.subject, env.producer):
             audit.log_event(EVENT_POLICY_DENY, {
                 "producer": env.producer,
                 "subject": env.subject,
                 "reason": "policy_denied",
+                "roles": roles,
             })
+        # if not policy.can_publish(env.subject, env.producer):
+        #     audit.log_event(EVENT_POLICY_DENY, {
+        #         "producer": env.producer,
+        #         "subject": env.subject,
+        #         "reason": "policy_denied",
+        #     })
             raise HTTPException(status_code=403, detail="Publish not allowed by policy")
 
 
