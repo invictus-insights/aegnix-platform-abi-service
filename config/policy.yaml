@@ -15,5 +15,8 @@ subjects:
 
   fusion.topic:
     pubs: [fusion_ae]
-    subs: []
+    subs: [test_sse_ae]
     labels: [default]
+
+roles:
+  subscriber: {}

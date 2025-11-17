@@ -5,11 +5,25 @@ Test: Verify ABI bus → SSE /subscribe loopback.
 import asyncio
 import json
 import threading
+import jwt
+import time
 from contextlib import contextmanager
 from fastapi.testclient import TestClient
 from main import app
 from bus import bus
 
+TEST_PRIV = "Q5BiVnloRJ1sgZ5ONiIzO5l9DLO3TTL1M10eR3bKTuA="
+
+
+def make_test_jwt():
+    # NOTE: ABI uses symmetric HS256 or your configured algorithm
+    payload = {
+        "sub": "test_sse_ae",
+        "roles": "subscriber",
+        "iat": int(time.time()),
+        "exp": int(time.time()) + 3600
+    }
+    return jwt.encode(payload, "mydevsecret123", algorithm="HS256")
 
 @contextmanager
 def running_client():
@@ -18,14 +32,11 @@ def running_client():
         yield c
 
 
-def stream_sse(client: TestClient, topic: str, results: list, stop_event: threading.Event):
-    """
-    Blocking helper: read from the SSE endpoint until a message arrives or stop_event is set.
-    Runs in a thread so pytest main loop can await bus.publish().
-    """
-    print(f"[DEBUG] Connecting to /subscribe/{topic}")
-    with client.stream("GET", f"/subscribe/{topic}") as stream:
-        print(f"[DEBUG] SSE connection established → /subscribe/{topic}")
+def stream_sse(client, topic, results, stop_event):
+    token = make_test_jwt()
+    headers = {"Authorization": f"Bearer {token}"}
+
+    with client.stream("GET", f"/subscribe/{topic}", headers=headers) as stream:
         for line in stream.iter_lines():
             print(f"[DEBUG] SSE raw line: {line!r}")
             if stop_event.is_set():

@@ -30,6 +30,7 @@ DB_PATH = "db/abi_state.db"
 store = SQLiteStorage(DB_PATH)
 keyring = ABIKeyring(db_path=DB_PATH)
 emit.keyring = keyring
+subscribe.keyring = keyring
 admission = AdmissionService(keyring)
 
 BASE_DIR = os.path.dirname(__file__)
@@ -61,6 +62,9 @@ def build_effective_policy():
 
     # Update emit route
     emit_route.policy = engine
+
+    # Update subscribe route
+    subscribe.policy = engine
 
     # Update capabilities route
     capabilities_route.policy_engine = engine

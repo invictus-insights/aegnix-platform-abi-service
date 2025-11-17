@@ -140,34 +140,9 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         # if env.producer != claims.get("sub"):
         #     raise HTTPException(status_code=403, detail="Producer mismatch with token")
 
-        # --- Policy Enforcement -------------------------------------
-        if not policy.can_publish(env.producer, env.subject):
-            audit.log_event(EVENT_POLICY_DENY, {
-                "producer": env.producer,
-                "subject": env.subject,
-                "reason": "policy_denied",
-                "roles": roles,
-            })
-        # if not policy.can_publish(env.subject, env.producer):
-        #     audit.log_event(EVENT_POLICY_DENY, {
-        #         "producer": env.producer,
-        #         "subject": env.subject,
-        #         "reason": "policy_denied",
-        #     })
-            raise HTTPException(status_code=403, detail="Publish not allowed by policy")
-
-
-
         # --- Trust Verification -------------------------------------
         if keyring is None:
             raise HTTPException(status_code=500, detail="Keyring not initialized")
-
-        # rec = keyring.get_key(env.producer) or keyring.get_key(env.key_id)
-        # if not rec or rec.status != "trusted":
-        #     audit.log_event(EVENT_TRUST_FAIL, {
-        #         "producer": env.producer, "key_id": env.key_id
-        #     })
-        #     raise HTTPException(status_code=403, detail="AE not trusted")
 
         rec = keyring.get_key(env.producer) or keyring.get_key(env.key_id)
         if not rec:
@@ -189,6 +164,19 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
                 "key_id": env.key_id
             })
             raise HTTPException(status_code=403, detail="AE not trusted")
+
+        # --- Policy Enforcement (Step 3.3) ---------------------------
+        # Roles = keyring override > JWT roles
+        effective_roles = (rec.roles or roles)
+
+        if not policy.can_publish(env.producer, env.subject, roles=effective_roles):
+            audit.log_event(EVENT_POLICY_DENY, {
+                "producer": env.producer,
+                "subject": env.subject,
+                "reason": "policy_denied",
+                "roles": roles,
+            })
+            raise HTTPException(status_code=403, detail="Publish not allowed by policy")
 
         # --- Signature Verification ---------------------------------
         pub_raw = base64.b64decode(rec.pubkey_b64)

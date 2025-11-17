@@ -1,118 +1,105 @@
-# AEGNIX ABI Service (Phase 3F → 3G)
+# AEGNIX ABI Service
 
-The **AEGNIX Agent Bridge Interface (ABI) Service** is the trusted, cryptographically enforced admission and coordination layer for the **AEGNIX Swarm Mesh**.
+The **AEGNIX Agent Bridge Interface (ABI) Service** is the authenticated, trusted, cryptographically enforced coordination layer for the **AEGNIX Swarm Framework**.
 
-It ensures that all **Atomic Experts (AEs)** entering the swarm are:
+It performs **admission**, **verification**, **policy enforcement**, **key trust management**, **event dispatch**, and **developer‑facing observability**, forming the backbone of secure multi‑agent operations across the swarm.
 
-* **Authenticated** (dual-crypto admission + JWT session grant)
-* **Authorized** (static + dynamic policy engine)
-* **Trusted** (keyring-validated ed25519 public keys)
-* **Audited** (full non-repudiation logs)
-* **Coordinated** (EventBus + SSE real-time developer routing)
+This service ensures that every Atomic Expert (AE):
 
-This service is the **central nervous system** of the AEGNIX platform, governing every message, every AE, every capability, and every trust relationship.
+* is **verified** (ed25519 dual‑crypto handshake)
+* is **authenticated** (JWT session)
+* is **authorized** (static + dynamic policy)
+* is **trusted** (keyring‑managed public keys)
+* is **audited** (non‑repudiation logs)
+* is **coordinated** (EventBus + SSE routing for developers)
 
 ---
 
-# 🔐 Core Responsibilities
+## Core Responsibilities
 
-## 1. **Admission (ed25519 Challenge-Response)**
+### 1. Admission (ed25519 Challenge‑Response)
 
-* AE sends `/register`
-* ABI returns a **nonce**
-* AE signs nonce with its ed25519 private key
-* ABI verifies signature, marks AE as **trusted**, stores key in keyring
-* ABI issues a **JWT session token**
+The ABI issues a nonce, the AE signs it with its ed25519 private key, the ABI verifies the signature, then sets the AE to **trusted** and returns a **JWT session token**.
 
-```plantuml
-@startuml
-participant AE
-participant ABI
+**Flow:**
 
-AE -> ABI: POST /register
-ABI -> AE: nonce
-AE -> ABI: POST /verify {signed_nonce}
-ABI -> AE: 200 OK + JWT (session grant)
-@enduml
+```text
+/register  →  nonce issued
+/verify    →  signature checked, AE trusted, JWT granted
 ```
 
 ---
 
-## 2. **Policy Enforcement (Static + Dynamic Merge)**
+### 2. Verified Message Emission (`POST /emit`)
 
-* Static `policy.yaml` defines hard boundaries
-* AEs may optionally declare dynamic capabilities:
+Each incoming message must:
 
-  * publishes: []
-  * subscribes: []
-* ABI merges both into a unified **Effective Policy**
-* Hot-reload watcher updates policies in real time
+1. Include a valid session JWT (`Bearer <token>`)
+2. Declare a producer that matches JWT `sub`
+3. Carry a proper Envelope (canonical AEGNIX format)
+4. Pass policy checks (`can_publish`)
+5. Match a **trusted** keyring entry
+6. Have a valid Ed25519 signature over `to_signing_bytes()`
 
-```plantuml
-@startuml
-skinparam style strictuml
+If all checks pass, the event is:
 
-folder "Static Policy YAML" {
-  [policy.yaml]
-}
-
-node "SQLite" {
-  [Dynamic Capabilities]
-}
-
-component "PolicyEngine" {
-  [Merge Logic]
-}
-
-[policy.yaml] --> [Merge Logic]
-[Dynamic Capabilities] --> [Merge Logic]
-[Merge Logic] --> [Effective Policy]
-
-@enduml
-```
+* published to the transport (local default)
+* logged to audit
+* fanned out through the EventBus
+* reflected to any `/subscribe/<topic>` SSE clients
 
 ---
 
-## 3. **Verified Emission (/emit)**
+### 3. Policy Enforcement (Static + Dynamic)
 
-Every AE message must:
+The ABI merges:
 
-* Include a **valid JWT** (`Bearer <grant>`)
-* Be **signed** (ed25519) over the Envelope structure
-* Pass **policy.can_publish()**
-* Use a **trusted key** stored in keyring
-* Match token `sub == producer`
+* **Static `policy.yaml`**
+* **Dynamic AE capabilities** from the SQLite capability table
 
-```plantuml
-@startuml
-participant AE
-participant ABI
-participant Bus
+This forms the **Effective Policy**, used for:
 
-AE -> ABI: POST /emit (Envelope + JWT)
-ABI -> ABI: Verify JWT
-ABI -> ABI: Verify policy
-ABI -> ABI: Verify ed25519 signature
-ABI -> Bus: publish(subject, payload)
-ABI -> AE: {status: accepted}
-@enduml
-```
+* `can_publish(ae_id, subject, roles)`
+* `can_subscribe(ae_id, subject, roles)`
+
+A background watcher hot‑reloads policy whenever YAML or capability rows change.
 
 ---
 
-# 📦 Directory Structure
+### 4. Keyring & Trust State
+
+The keyring is stored in `db/abi_state.db` and provides:
+
+* AE public key records
+* roles (Phase 3G key‑authorized role merge)
+* trust status (`trusted`, `untrusted`, `revoked`)
+* expiration metadata
+* audit logging on all key changes
+
+Roles stored here override JWT roles for security reasons.
+
+---
+
+### 5. Developer Observability (`GET /subscribe/<topic>`, SSE)
+
+The ABI includes a secure **Server‑Sent Events** endpoint for real‑time monitoring.
+
+Security for SSE:
+
+* JWT required
+* keyring trust required
+* policy controls subscription permissions
+
+The EventBus bridges `publish(topic, message)` to active SSE streams.
+
+---
+
+## 📁 Directory Structure
 
 ```
 abi_service/
 ├── main.py
 ├── bus.py
-├── routes/
-│   ├── admin.py
-│   ├── audit.py
-│   ├── emit.py
-│   ├── register.py
-│   ├── subscribe.py
-│   └── capabilities.py
 ├── config/
 │   └── policy.yaml
 ├── db/
@@ -120,48 +107,75 @@ abi_service/
 ├── logs/
 │   ├── abi_service.log
 │   └── abi_audit.log
+├── routes/
+│   ├── admin.py
+│   ├── audit.py
+│   ├── capabilities.py
+│   ├── emit.py
+│   ├── register.py
+│   └── subscribe.py
 └── tests/
-    ├── test_register_flow.py
     ├── test_emit_verified.py
+    ├── test_register_flow.py
     ├── test_policy_dynamic_merge.py
     └── test_subscribe_loopback.py
 ```
 
 ---
 
-# 🔑 Key Modules
+## Routes Overview
 
-## **AdmissionService**
+### `POST /register`
 
-Dual-crypto admission flow:
+Begin admission, receive nonce.
 
-* Nonce challenge
-* ed25519 verification
-* Keyring trust set
-* JWT grant issued
+### `POST /verify`
 
-## **Keyring (SQLite)**
+Submit signed nonce → trust elevation + JWT.
 
-Stores:
+### `POST /emit`
 
-* AE public key
-* status (untrusted → trusted → revoked)
-* roles (future)
-* prevents duplicates (Phase 3G+)
+Verified message emission.
 
-## **PolicyEngine**
+### `POST /capabilities`
 
-Merges:
+AE declares its publishes/subscribes (Phase 3G).
 
-* **Static** policy from YAML
-* **Dynamic** AE capabilities from SQLite
+### `GET /subscribe/<topic>`
 
-Enforces:
+SSE stream for developers (policy controlled).
 
-* can_publish(ae, subject)
-* can_subscribe(ae, subject)
+### `/admin/*`
 
-## **Capabilities Route (NEW Phase 3G)**
+Keyring management utilities.
+
+### `/audit/*`
+
+Audit records (JSONL entries).
+
+---
+
+## Policy Model
+
+### Static Policy (`config/policy.yaml`)
+
+Defines baseline swarm rules:
+
+```yaml
+subjects:
+  fused.track:
+    pubs: [fusion_ae]
+    subs: [advisory_ae, roe_ae]
+    labels: [CUI]
+
+  fusion.topic:
+    subs: [test_sse_ae]
+
+roles:
+  subscriber: {}
+```
+
+### Dynamic Capabilities
 
 AEs may declare:
 
@@ -173,97 +187,94 @@ AEs may declare:
 }
 ```
 
-JWT-verified → stored → hot-reload updates Effective Policy.
+Stored in SQLite and merged automatically.
 
-## **SSE /subscribe**
+### Effective Policy
 
-Used for developer debugging & real-time mesh visibility.
+At runtime, the ABI enforces:
 
-## **Emit Route**
-
-Full verification chain:
-
-1. JWT
-2. Envelope schema
-3. Policy
-4. Keyring trust
-5. Signature
-6. Dispatch to event bus
-7. Local SSE fan-out
+* **union** of static + dynamic rules
+* keyring roles > JWT roles
+* deny‑by‑default for unknown subjects
 
 ---
 
-# 🚀 Test Suite
+## Testing
 
-Run:
+Run full suite:
 
 ```bash
 pytest -v -s --log-cli-level=DEBUG
 ```
 
-Current status:
+Coverage includes:
 
-* **All tests passing** (Phase 3F + dynamic policy)
+* Verified signature checks
+* JWT validation
+* Role merge
+* Policy merge
+* SSE loopback
+* Dynamic capability ingestion
+* Full admission flow
+
+All current tests: **PASSING**.
 
 ---
 
-# 🔧 Environment
+## Environment Variables
 
 Set JWT secret:
 
-```powershell
-$env:ABI_JWT_SECRET="mydevsecret123"
+```bash
+export ABI_JWT_SECRET="mydevsecret123"
 ```
 
-DB defaults:
+Files created automatically:
 
 ```
 db/abi_state.db
-```
-
-Logs:
-
-```
 logs/abi_service.log
 logs/abi_audit.log
 ```
 
 ---
 
-# 📅 Roadmap
+## 🗺 Roadmap (Phase 3 → 4)
 
-## ✅ Completed (Phase 3F)
+### ✔ Phase 3F (Complete)
 
-* Verified /emit (JWT + policy + trust + signature)
-* Dual-crypto admission
-* Keyring integration
-* EventBus + SSE loopback
-* Hot reload for static policy & dynamic caps
-* AE SDK integration
+* Verified /emit
+* JWT session enforcement
+* Signature validation
+* Trust‑state enforcement
+* Static policy merging
+* Developer SSE routing
 
-## 🟦 Phase 3G (CURRENT)
+### ✔ Phase 3G (Complete)
 
-* AE-declared publishes/subscribes
-* Dynamic merge into Effective Policy
-* Unknown subject rejection
-* Audit trails for capability change
+* Dynamic capability ingestion
+* Effective Policy merge
+* Role merge (keyring > JWT)
+* Unknown‑subject protection
 
-## 🟧 Phase 4
+### ⬜ Phase 4A (Next)
 
+* Remove backward‑compat shims
+* Harden role system
 * JWT refresh tokens
-* Multi-transport mesh (Kafka, Pub/Sub)
-* AE revocation propagation
+* AE revocation cascades
 
-## 🟪 Phase 5
+### ⬜ Phase 5
 
 * Federated ABIs
-* Cross-domain trust
-* Purpose Policy Overlay (Reflection Layer)
+* Cross‑domain trust
+* Reflection Layer integration
+* Purpose Policy (SPP) enforcement
 
 ---
 
-# 📘 Version
+## Version
 
-**ABI Service:** v0.3.8 — Phase 3F/3G Combined
-**License:** Proprietary (Patent filings pending)
-**Authors:** Invictus Insights R&D (Aegnix Framework)
+**ABI Service:** v0.3.8 (Phase 3F/3G)
+**License:** Proprietary – Patent filings pending
+**Authors:** Invictus Insights R&D
