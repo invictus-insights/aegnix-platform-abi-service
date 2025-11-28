@@ -43,37 +43,6 @@ class EventBus:
 
         return queue_mode
 
-    # def subscribe(self, topic: str = None):
-    #     """
-    #     Usage:
-    #         q = bus.subscribe("topic")              # queue mode
-    #         @bus.subscribe("*")                     # decorator mode
-    #         async def handler(topic, payload): ...
-    #     """
-    #     # --- Decorator mode ---
-    #     if topic is None or not isinstance(topic, str):
-    #         def decorator(func: Callable[[str, dict], Awaitable[None]]):
-    #             func._bus_topic = "*" if topic is None else topic
-    #             self._handlers.append(func)
-    #             return func
-    #
-    #         return decorator
-    #
-    #         # ─── Queue mode ─────────────────────────────────────────────────
-    #     def maybe_decorator(func=None):
-    #         # Called as @bus.subscribe("topic")
-    #         if callable(func):
-    #             func._bus_topic = topic
-    #             self._handlers.append(func)
-    #             return func
-    #         # Called as bus.subscribe("topic")
-    #         q = asyncio.Queue()
-    #         self._topics[topic].append(q)
-    #         return q
-    #
-    #     return maybe_decorator
-    #
-
 
     async def publish(self, topic: str, message: dict):
         """Deliver event to local queues and registered handlers."""
@@ -95,33 +64,17 @@ class EventBus:
                 if inspect.isawaitable(result):
                     await result
 
-        # for handler in list(self._handlers):
-        #     handler_topic = getattr(handler, "_bus_topic", "*")
-        #     print(f"[BUS DEBUG] Checking handler {handler.__name__} topic={handler_topic}")
-        #     if handler_topic in ("*", topic):
-        #         print(f"[BUS DEBUG] → invoking handler {handler.__name__} for {topic}")
-        #         await handler(topic, message)
+    def add_queue(self, topic: str, queue: asyncio.Queue):
+        """Public API: add an external queue (e.g., SSE queue) to a topic."""
+        self._topics[topic].append(queue)
+
+    def remove_queue(self, topic: str, queue: asyncio.Queue):
+        """Public API: remove an external queue from a topic."""
+        try:
+            self._topics[topic].remove(queue)
+        except ValueError:
+            pass
 
 # Create global bus instance
 bus = EventBus()
 
-
-
-# import asyncio
-# from collections import defaultdict
-#
-# class EventBus:
-#     """Simple in-memory fanout bus for local dev/SSE."""
-#     def __init__(self):
-#         self._topics: dict[str, list[asyncio.Queue]] = defaultdict(list)
-#
-#     def subscribe(self, topic: str) -> asyncio.Queue:
-#         q = asyncio.Queue()
-#         self._topics[topic].append(q)
-#         return q
-#
-#     async def publish(self, topic: str, message: dict):
-#         for q in list(self._topics.get(topic, [])):
-#             await q.put(message)
-#
-# bus = EventBus()

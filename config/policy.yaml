@@ -6,7 +6,7 @@ subjects:
 
   roe.result:
     pubs: [roe_ae]
-    subs: [advisory_ae]
+    subs: [advisory_ae, sub_ae]
 
   classified.data:
     pubs: []
@@ -17,6 +17,10 @@ subjects:
     pubs: [fusion_ae]
     subs: [test_sse_ae]
     labels: [default]
+
+  hello.world:
+    pubs: [pub_ae]
+    subs: [sub_ae]
 
 roles:
   subscriber: {}

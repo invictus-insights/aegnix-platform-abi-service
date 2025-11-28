@@ -1,5 +1,7 @@
--e ../aegnix_sdk
+../aegnix_sdk/dist/aegnix_core-0.1.5-py3-none-any.whl
+../aegnix_sdk/dist/aegnix_sdk-0.1.15-py3-none-any.whl
 fastapi
 uvicorn
 sqlite-utils
-jwt
+PyJWT==2.8.0
+

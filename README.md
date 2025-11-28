@@ -226,7 +226,7 @@ All current tests: **PASSING**.
 Set JWT secret:
 
 ```bash
-export ABI_JWT_SECRET="mydevsecret123"
+export ABI_JWT_SECRET="change-me"
 ```
 
 Files created automatically:
@@ -272,6 +272,74 @@ logs/abi_audit.log
 * Purpose Policy (SPP) enforcement
 
 ---
+
+## Deploy Alpha
+This section is the start of documentation on how to deploy the ABI Service via a docker container image
+
+**Environment Variables:**
+* using the linux commandline we set env vars as a precursor to the build and deployment of the source 
+```bash
+DOCKERFILE="Dockerfile"
+JOB_NAME="abi-service-alpha"
+PROJECT_ID="athena-platform-464120"
+REGION="us-central1"
+REPO="aegnix-framework"
+IMAGE_NAME="abi-service-alpha"
+SERVICE_NAME="abi-service-alpha"
+TAG="v0.05"
+```
+
+**Authenticate Docker with Artifact Registry**
+Run once (or when credentials expire):
+
+```bash
+gcloud auth configure-docker $REGION-docker.pkg.dev
+```
+
+---
+**Assumptions:**
+* User is running docker desktop
+*  old local packages are removed
+```bash
+rm -rf dist build *.egg-info
+```
+* sdk and core wheels are built
+  * from the aegnix_core folder run
+    ```cmd
+    pip wheel . -w dist
+    ```
+  * from the aegnix_sdk folder run
+    ```cmd
+    pip wheel . -w dist --find-links ../aegnix_core/dist
+    ```
+
+
+**Build Docker Image:**
+
+*run from parent folder:* sonny@Wolverine:/mnt/e/git/invictus_insights/platform$
+```bash
+docker build --no-cache -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG -f abi_service/$DOCKERFILE .
+```
+
+**Push the Image to Artifact Registry**
+```bash
+docker push $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG
+```
+
+**Deploy to Cloud Run**
+Run from **GCP Cloud Shell** or local CLI:
+
+```bash
+gcloud run deploy $SERVICE_NAME \
+  --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG \
+  --region=$REGION \
+  --platform=managed \
+  --no-allow-unauthenticated \
+  --project=$PROJECT_ID \
+  --set-env-vars=ABI_JWT_SECRET="change_me"
+
+```
+
 
 ## Version
 

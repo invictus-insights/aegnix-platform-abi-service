@@ -10,7 +10,7 @@ log = get_logger("ABI.Register")
 keyring = ABIKeyring(db_path="db/abi_state.db")
 admission = AdmissionService(keyring)
 
-JWT_SECRET = os.getenv("ABI_JWT_SECRET", "dev-secret-change-me")
+JWT_SECRET = os.getenv("ABI_JWT_SECRET", "change-me")
 JWT_TTL = int(os.getenv("ABI_JWT_TTL_SECONDS", "600"))
 
 
