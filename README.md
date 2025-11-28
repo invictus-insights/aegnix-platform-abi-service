@@ -340,6 +340,88 @@ gcloud run deploy $SERVICE_NAME \
 
 ```
 
+---
+## AE Identity Model: Understanding `ae_id`, `roles`, and `profile`
+
+To operate securely and predictably inside the AEGNIX Swarm Framework, every Atomic Expert (AE) is defined by **three separate identity concepts**. These concepts work together but serve different purposes.
+
+---
+
+### `ae_id` — AE Identity ("Who You Are")
+
+`ae_id` is the **unique name** of the AE inside the swarm. It acts like a username or service identity.
+
+Examples:
+
+* `fusion_ae`
+* `adsb_ingestor`
+* `operator_dashboard`
+* `pub_ae`
+
+**Purpose:**
+
+* Identifies the AE in the keyring
+* Appears in JWT `sub` claim
+* Drives policy checks (`can_publish`, `can_subscribe`)
+* Used for capability declaration and audit logs
+
+---
+
+### `roles` — Functional Role ("What You Do")
+
+Roles describe the **function** or **intended responsibility** of the AE.
+
+Examples:
+
+* `producer`
+* `subscriber`
+* `operator`
+* `sensor`
+* `controller`
+
+**Purpose:**
+
+* Metadata passed through JWT and session
+* Used by policy to enforce capabilities and access
+* Overrides come from the keyring (more trusted than JWT)
+
+---
+
+### `profile` — Session Profile ("What Rules Apply to You")
+
+Profiles define which **session rules** apply to an AE — not what it does, but **how its session behaves**.
+
+Examples:
+
+* `ae_standard`
+* `ae_operator`
+* `ae_ingestor`
+* `ae_privileged`
+* `ae_federated`
+
+**Purpose:**
+
+* Controls session TTL
+* Controls refresh-token TTL
+* Defines idle timeout policies
+* Enables different trust requirements per category
+
+---
+
+### Summary Table
+
+| Concept   | Meaning                  | Example       | Used For                     |
+| --------- | ------------------------ | ------------- | ---------------------------- |
+| `ae_id`   | Identity (who you are)   | `fusion_ae`   | JWT `sub`, keyring, policy   |
+| `roles`   | Job (what you do)        | `producer`    | Policy metadata, permissions |
+| `profile` | Ruleset (how you behave) | `ae_standard` | Session TTL, refresh rules   |
+
+---
+
+Together, these form the trusted identity model for every AE in the AEGNIX Swarm.
+
+---
+
 
 ## Version
 

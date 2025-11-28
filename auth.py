@@ -2,123 +2,105 @@
 """
 ABI Authentication Utilities
 --------------------------------------
+This module provides the core JWT helpers for all session-based
+authentication inside the ABI Service.
 
-This module implements lightweight JSON Web Token (JWT) utilities
-for the AEGNIX ABI Service.  It provides a minimal authentication layer
-that issues and verifies session tokens for registered Atomic Experts (AEs).
+It acts as the *single source of truth* for:
+  • Access token issuance
+  • Token verification
+  • Common TTL / algorithm configuration
 
-These tokens form the **session integrity backbone**.
+The ABI Service uses *access tokens* (short-lived JWTs) for:
+  - /emit
+  - /subscribe
+  - /audit
+  - /capabilities
+  - /session/heartbeat
+  - /session/refresh
 
-Purpose
--------
-1.  Generate JWTs (`issue_token`) when an AE successfully completes
-    the dual-crypto admission handshake.
-2.  Verify JWTs (`verify_token`) for subsequent secured routes
-    (e.g., /emit), ensuring the caller is an authenticated AE
-    operating within an active session.
-
-Token Structure
----------------
-Each token encodes three claims:
-
-    sub:  AE identifier (string)
-    sid:  Session identifier (UUID string)
-    exp:  Expiration timestamp (UTC, default 24 hours)
-
-Example payload:
-
-    {
-        "sub": "fusion-ae",
-        "sid": "c1b06e64-7c55-4e91-8af7-f52c49a50f3f",
-        "exp": 1730867253
-    }
-
-The token is signed using an HMAC key provided via the
-`ABI_JWT_SECRET` environment variable.
-
-Integration Points
-------------------
-• `emit.py`  → uses `verify_token()` to authenticate messages
-• `register.py` → uses `issue_token()` to grant a token upon admission
-
-Environment Variables
----------------------
-ABI_JWT_SECRET : str
-    Secret key used to sign and verify JWTs.
-    Default: "change_me" (for development only)
-
-Raises
-------
-HTTPException(401)
-    If the token is expired or invalid.
-
-References
-----------
-• RFC 7519 – JSON Web Token (JWT)
-• Framework Dev Phase 3F – Verified Emission & Session Integrity
+Refresh tokens are **NOT JWTs** — they are opaque values stored
+and validated by SessionManager. This module only handles access JWTs.
 """
-import os, jwt, datetime
+import os, jwt, time
 from fastapi import HTTPException
 
 # ---------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------
+JWT_SECRET = os.getenv("ABI_JWT_SECRET", "change-me")
+JWT_ALGO = os.getenv("ABI_JWT_ALGO", "HS256")
 
-# Secret key used for signing and verifying JWTs.
-# Loaded from environment
-SECRET = os.getenv("ABI_JWT_SECRET", "change_me")
-print("ABI_JWT_SECRET at startup =", SECRET)
+# Access token TTL (seconds)
+ACCESS_TTL = int(os.getenv("ABI_JWT_TTL_SECONDS", "300"))  # default: 5 minutes
+
+print("ABI_JWT_SECRET at startup =", JWT_SECRET)
 
 
-# ---------------------------------------------------------------------
-# Functions
-# ---------------------------------------------------------------------
-def issue_token(ae_id: str, session_id: str, ttl_seconds: int = 86400):
+# ----------------------------------------------------------------------
+# Issue Access Token
+# ----------------------------------------------------------------------
+def issue_access_token(ae_id: str, session_id: str, roles: str = "producer"):
     """
-     Issue a signed JWT for a registered AE session.
+    Issue a short-lived access JWT bound to a specific AE + session.
 
-     Args:
-         ae_id: Unique identifier of the AE (subject).
-         session_id: Unique session identifier associated with this AE instance.
-         ttl_seconds: Token lifetime in seconds. Default is 24 hours.
+    Claims:
+      sub  -> AE identifier
+      sid  -> session UUID
+      roles -> roles declared at verify-time (string)
+      iat  -> issuance time (UTC)
+      exp  -> expiration time (UTC)
 
-     Returns:
-         str: Encoded JWT string.
+    Returns:
+        str: Encoded JWT string
+    """
+    now = int(time.time())
 
-     Example:
-         >>> token = issue_token("fusion_ae", "uuid-1234")
-         >>> print(token)
-         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
-     """
     payload = {
         "sub": ae_id,
         "sid": session_id,
-        "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=ttl_seconds),
+        "roles": roles,
+        "iat": now,
+        "exp": now + ACCESS_TTL,
     }
-    return jwt.encode(payload, SECRET, algorithm="HS256")
+
+    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGO)
 
 
+# ----------------------------------------------------------------------
+# Verify Access Token
+# ----------------------------------------------------------------------
 def verify_token(token: str):
     """
-      Verify a JWT and return its decoded claims.
+    Decode and validate an access JWT.
 
-      Args:
-          token: JWT string provided in the Authorization header.
+    Raises:
+        HTTPException(401) if token is expired or invalid.
 
-      Returns:
-          dict: Decoded payload containing `sub`, `sid`, and `exp`.
-
-      Raises:
-          HTTPException(401): If the token is expired or invalid.
-
-      Example:
-          >>> claims = verify_token(token)
-          >>> claims["sub"]
-          'fusion-ae'
-      """
+    Returns:
+        dict: decoded JWT claims
+    """
     try:
-        return jwt.decode(token, SECRET, algorithms=["HS256"])
+        return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGO])
+
     except jwt.ExpiredSignatureError:
         raise HTTPException(status_code=401, detail="Token expired")
+
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
+
+
+# ----------------------------------------------------------------------
+# TTL Check
+# ----------------------------------------------------------------------
+def get_token_expiration(token: str) -> int:
+    """
+    Utility for debugging / introspection:
+
+    Returns:
+        exp (unix timestamp)
+
+    Raises:
+        HTTPException if token invalid.
+    """
+    claims = verify_token(token)
+    return claims.get("exp", 0)

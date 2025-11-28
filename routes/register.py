@@ -1,20 +1,18 @@
 # abi_service/routes/register.py
-import os, time, jwt
+
 from fastapi import APIRouter, HTTPException, Body
 from aegnix_abi.admission import AdmissionService
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.logger import get_logger
 
 from sessions import SessionManager
+from auth import ACCESS_TTL, issue_access_token
 
 router = APIRouter()
 log = get_logger("ABI.Register")
 keyring = ABIKeyring(db_path="db/abi_state.db")
 admission = AdmissionService(keyring)
 session_manager: SessionManager = None
-
-JWT_SECRET = os.getenv("ABI_JWT_SECRET", "change-me")
-ACCESS_TTL = int(os.getenv("ABI_JWT_TTL_SECONDS", "300"))
 
 
 @router.post("/register")
@@ -31,19 +29,7 @@ def issue_challenge(ae_id: str = Body(..., embed=True)):
 @router.post("/verify")
 def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
     """
-    Verify AE’s signed challenge response, create a trust session,
-    issue short-lived access JWT and long-lived refresh token.
-
-    PHASE 4A OUTPUT:
-    {
-        "ae_id": "...",
-        "verified": true,
-        "session_id": "sid-uuid",
-        "access_token": "<jwt>",
-        "expires_in": 300,
-        "refresh_token": "<opaque>",
-        "refresh_expires_in": 86400
-    }
+    Verify AE response → Create session → Issue access+refresh tokens.
     """
 
     if session_manager is None:
@@ -79,32 +65,22 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
         session = session_manager.create_session(
             subject=ae_id,
             pubkey_fpr=pubkey_fpr,
-            profile="tactical_ae",
+            profile="default",  # how the session behaves, it's permission presets
             metadata={"roles": roles}
         )
 
         # ------------------------------------------------------
         # 5. Create Refresh Token (Phase 4A)
         # ------------------------------------------------------
-        raw_refresh, refresh_rec = session_manager.create_refresh_token(
-            session_id=session.id,
-            profile="tactical_ae"
-        )
+        raw_refresh, refresh_rec = session_manager.create_refresh_token(session_id=session.id)
 
         # ------------------------------------------------------
-        # 6. Generate Access JWT (short-lived)
+        # 6) Issue Access Token
         # ------------------------------------------------------
-        now = int(time.time())
-        access_token = jwt.encode(
-            {
-                "sub": ae_id,
-                "sid": session.id,              # NEW — session binding
-                "roles": roles,
-                "iat": now,
-                "exp": now + ACCESS_TTL
-            },
-            JWT_SECRET,
-            algorithm="HS256"
+        access_token = issue_access_token(
+            ae_id=ae_id,
+            session_id=session.id,
+            roles=roles,
         )
 
         # ------------------------------------------------------
