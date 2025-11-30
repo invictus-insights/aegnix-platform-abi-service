@@ -1,3 +1,4 @@
+#test_emit_verified.py
 """
 Test Suite: Verified Emission (Phase 3F)
 ----------------------------------------
@@ -14,26 +15,27 @@ Covers:
     Bad signature                         → 400
 """
 
-import base64, hashlib, pytest, httpx
+import base64, hashlib, pytest
 from fastapi.testclient import TestClient
 from fastapi import status
 
 from main import app
-from auth import issue_token
+from auth import issue_access_token
 from aegnix_core.crypto import ed25519_generate, ed25519_sign
 from aegnix_core.envelope import Envelope
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.policy import PolicyEngine
 import routes.emit as emit_route
 
+
 # ---------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------
 
-BASE_URL = "http://127.0.0.1:8080"
+  # BASE_URL= "http://127.0.0.1:8080"
 
 
-# @pytest.fixture(scope="module")
+# @pytest.BASE_URLfixture(scope="module")
 # def client():
 #     with httpx.Client(base_url=BASE_URL) as c:
 #         yield c
@@ -61,7 +63,9 @@ def setup_keyring(tmp_path_factory):
 
 @pytest.fixture(autouse=True)
 def allow_policy():
-    from routes import emit as emit_route
+    """
+   Allow fusion_ae to publish fused.track subject for happy-path tests.
+   """
     p = PolicyEngine()
     p.allow(subject="fused.track", publisher="fusion_ae")
     emit_route.policy = p  # inject directly into the live route
@@ -81,7 +85,7 @@ def allow_policy():
 # Helpers
 # ---------------------------------------------------------------------
 
-def make_envelope(subject="fused.track", producer="fusion_ae", priv=None, valid_sig=True):
+def make_envelope(subject="fused.track", producer="fusion_ae", priv=None, valid_sig: bool = True,):
     env = Envelope(
         producer=producer,
         subject=subject,
@@ -105,7 +109,7 @@ def make_envelope(subject="fused.track", producer="fusion_ae", priv=None, valid_
 
 def test_valid_emit(client, setup_keyring):
     keyring, priv, _ = setup_keyring
-    token = issue_token("fusion_ae", "session-1")
+    token = issue_access_token("fusion_ae", "session-1")
     env = make_envelope(priv=priv)
 
     res = client.post(
@@ -133,7 +137,7 @@ def test_bad_token(client):
 def test_token_producer_mismatch(client, setup_keyring):
     keyring, priv, _ = setup_keyring
     # Token for another AE
-    token = issue_token("rogue-ae", "session-x")
+    token = issue_access_token("rogue-ae", "session-x")
     env = make_envelope(priv=priv, producer="fusion_ae")
 
     res = client.post(
@@ -146,7 +150,7 @@ def test_token_producer_mismatch(client, setup_keyring):
 
 def test_policy_denied(client, setup_keyring):
     keyring, priv, _ = setup_keyring
-    token = issue_token("fusion_ae", "session-2")
+    token = issue_access_token("fusion_ae", "session-2")
     # Disallowed subject
     env = make_envelope(subject="classified.data", priv=priv)
 
@@ -160,7 +164,7 @@ def test_policy_denied(client, setup_keyring):
 
 def test_invalid_signature(client, setup_keyring):
     keyring, _, _ = setup_keyring
-    token = issue_token("fusion_ae", "session-3")
+    token = issue_access_token("fusion_ae", "session-3")
     env = make_envelope(valid_sig=False)
 
     res = client.post(

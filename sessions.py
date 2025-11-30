@@ -56,8 +56,18 @@ class SessionManager:
         self.store = store
         self._ensure_tables()
 
-        # Default profiles (can be extended or loaded from YAML later)
+
+        # Default profiles (extend or load from YAML later posr phase 4 )
         self.profiles = {
+
+            # Universal test + baseline AE profile
+            "default": {
+                "session_lifetime_sec": 24 * 3600,
+                "refresh_lifetime_sec": 24 * 3600,
+                "access_ttl_sec": 300,
+                "max_idle_sec": 600,
+            },
+
             "tactical_ae": {
                 "session_lifetime_sec": 24 * 3600,
                 "refresh_lifetime_sec": 24 * 3600,

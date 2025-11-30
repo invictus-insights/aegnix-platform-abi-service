@@ -28,3 +28,33 @@ def setup_test_ae():
     ))
 
     yield
+
+
+@pytest.fixture(autouse=True)
+def reset_bus_state():
+    """
+    Reset the in-memory EventBus between tests so that handlers
+    and queues from one test do not bleed into another.
+
+    This matches the real behavior (long-lived bus) but gives us
+    deterministic isolation in the test suite.
+    """
+    from bus import bus
+
+    # Best-effort defensive clear; only in test context.
+    for attr in ("_handlers", "handlers"):
+        if hasattr(bus, attr):
+            getattr(bus, attr).clear()
+    for attr in ("_queues", "queues"):
+        if hasattr(bus, attr):
+            getattr(bus, attr).clear()
+
+    yield
+
+    # clean again after the test
+    for attr in ("_handlers", "handlers"):
+        if hasattr(bus, attr):
+            getattr(bus, attr).clear()
+    for attr in ("_queues", "queues"):
+        if hasattr(bus, attr):
+            getattr(bus, attr).clear()

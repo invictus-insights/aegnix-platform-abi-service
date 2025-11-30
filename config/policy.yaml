@@ -22,5 +22,15 @@ subjects:
     pubs: [pub_ae]
     subs: [sub_ae]
 
+  sdk.test:
+    pubs: [ sdk_test_ae ]
+    subs: [ sdk_test_ae ]
+    labels: [ default ]
+
+  sdk.test.reply:
+    pubs: [ sdk_test_ae ]
+    subs: [ sdk_test_ae ]
+    labels: [ default ]
+
 roles:
   subscriber: {}

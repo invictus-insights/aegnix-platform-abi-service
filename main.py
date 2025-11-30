@@ -115,21 +115,30 @@ def watch_policy(interval=5):
         time.sleep(interval)
 
 
-# ------------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Startup
-# ------------------------------------------------------------------------------
-
+# --------------------------------------------------------------------------
 @app.on_event("startup")
 async def startup():
     import asyncio
+    from abi_state import init_abi_state
 
     subscribe.set_main_loop(asyncio.get_running_loop())
+
+    # Initialize global session manager with shared SQLite DB
+    init_abi_state(store)
+
+    # Install SessionManager into the register router
+    from sessions import SessionManager
+    session_manager = SessionManager(store)
+
+    # Inject into register route
+    register.session_manager = session_manager
 
     log.info("ABI Service started with unified SQLite state")
     log.info(f"Static Policy Path: {STATIC_POLICY_PATH}")
 
     threading.Thread(target=watch_policy, daemon=True).start()
-
 
 # ------------------------------------------------------------------------------
 # Routers
