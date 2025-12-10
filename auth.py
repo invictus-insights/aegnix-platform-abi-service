@@ -33,7 +33,7 @@ JWT_ALGO = os.getenv("ABI_JWT_ALGO", "HS256")
 # Access token TTL (seconds)
 ACCESS_TTL = int(os.getenv("ABI_JWT_TTL_SECONDS", "300"))  # default: 5 minutes
 
-print("ABI_JWT_SECRET at startup =", JWT_SECRET)
+# print("ABI_JWT_SECRET at startup =", JWT_SECRET)
 
 
 # ----------------------------------------------------------------------

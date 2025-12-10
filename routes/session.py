@@ -26,6 +26,7 @@ def _get_bearer_token(authorization: Optional[str]) -> str:
 # POST /session/refresh
 # ------------------------------------------------------------------------------
 @router.post("/refresh")
+@router.post("/refresh/")
 def refresh_session(
     session_id: str = Body(..., embed=True),
     refresh_token: str = Body(..., embed=True),
@@ -86,6 +87,7 @@ def refresh_session(
 # POST /session/heartbeat
 # ------------------------------------------------------------------------------
 @router.post("/heartbeat")
+@router.post("/heartbeat/")
 def heartbeat(
     authorization: Optional[str] = Header(None),
 ):

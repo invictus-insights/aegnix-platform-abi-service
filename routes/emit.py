@@ -40,7 +40,7 @@ Raises:
     HTTPException(500): For unexpected internal errors.
 """
 
-import os, base64, jwt, hashlib
+import hashlib
 from fastapi import APIRouter, Request, HTTPException, Header, Depends
 from typing import Optional
 from aegnix_core.logger import get_logger
@@ -81,6 +81,7 @@ EVENT_RECEIVED = "emit_received"
 # Endpoint
 # ---------------------------------------------------------------------
 @router.post("")
+@router.post("/")
 async def emit_message(req: Request, authorization: str | None = Header(default=None)):
 #async def emit_message(req: Request, authorization: str | None = Header(default=None)):
     """
@@ -145,10 +146,21 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         if keyring is None:
             raise HTTPException(status_code=500, detail="Keyring not initialized")
 
-        rec = keyring.get_key(env.producer) or keyring.get_key(env.key_id)
+        rec = keyring.get_by_aeid(env.producer)
+
+        # If envelope declares key version/fingerprint
+        if not rec and env.key_id:
+            rec = keyring.get_by_fpr(env.key_id)
+
         if not rec:
             log.error({"event": "trust_debug", "msg": "AE key not found", "ae_id": env.producer})
             raise HTTPException(status_code=403, detail="AE not found in keyring")
+
+        #
+        # rec = keyring.get_key(env.producer) or keyring.get_key(env.key_id)
+        # if not rec:
+        #
+        #     raise HTTPException(status_code=403, detail="AE not found in keyring")
 
         # --- DEBUG: verify which key is loaded ---
         log.info({
@@ -180,7 +192,7 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
             raise HTTPException(status_code=403, detail="Publish not allowed by policy")
 
         # --- Signature Verification ---------------------------------
-        pub_raw = base64.b64decode(rec.pubkey_b64)
+        pub_raw = b64d(rec.pubkey_b64)
         sig_raw = b64d(env.sig) if isinstance(env.sig, str) else env.sig
 
         log.info({

@@ -153,5 +153,6 @@ app.include_router(capabilities_route.router, tags=["capabilities"])
 
 
 @app.get("/healthz")
+@app.get("/healthz/")
 def health():
     return {"status": "ok"}

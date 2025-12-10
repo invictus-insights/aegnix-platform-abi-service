@@ -13,12 +13,14 @@ keyring = ABIKeyring(db_path="db/abi_state.db")
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "supersecretadminkey123")
 
 @router.get("/keys")
+@router.get("/keys/")
 def list_keys():
     """List all registered AEs and their key metadata."""
     return {"keys": keyring.list_keys()}
 
 
 @router.post("/keys/add")
+@router.post("/keys/add/")
 def add_key(
     ae_id: str = Body(..., description="AE identifier"),
     pubkey_b64: str = Body(..., description="Base64 public key")
@@ -29,6 +31,7 @@ def add_key(
 
 
 @router.delete("/keys/{ae_id}")
+@router.delete("/keys/{ae_id}/")
 def delete_key(ae_id: str, x_admin_token: str = Header(...)):
     """
     Delete an AE key. Requires admin authorization.
@@ -36,7 +39,9 @@ def delete_key(ae_id: str, x_admin_token: str = Header(...)):
     if x_admin_token != ADMIN_TOKEN:
         raise HTTPException(status_code=403, detail="Unauthorized admin access")
 
-    rec = keyring.get_key(ae_id)
+    # rec = keyring.get_key(ae_id)
+    rec = keyring.get_by_aeid(ae_id)
+
     if not rec:
         raise HTTPException(status_code=404, detail="Key not found")
 
@@ -58,6 +63,7 @@ def delete_key(ae_id: str, x_admin_token: str = Header(...)):
 
 
 @router.post("/keys/revoke")
+@router.post("/keys/revoke/")
 def revoke_key(ae_id: str = Body(...)):
     """Revoke a key from the ABI keyring."""
     keyring.revoke_key(ae_id)
@@ -65,11 +71,13 @@ def revoke_key(ae_id: str = Body(...)):
 
 
 @router.get("/policy")
+@router.get("/policy/")
 def list_policy():
     return {"rules": policy.rules}
 
 
 @router.post("/policy/allow")
+@router.post("/policy/allow/")
 def policy_allow(subject: str = Body(...), publisher: str | None = Body(default=None),
                  subscriber: str | None = Body(default=None), labels: list[str] | None = Body(default=None)):
     policy.allow(subject, publisher=publisher, subscriber=subscriber, labels=labels or [])
@@ -77,6 +85,7 @@ def policy_allow(subject: str = Body(...), publisher: str | None = Body(default=
 
 
 @router.post("/policy/revoke")
+@router.post("/policy/revoke/")
 def policy_revoke(subject: str = Body(...), publisher: str | None = Body(default=None),
                   subscriber: str | None = Body(default=None)):
     policy.revoke(subject, publisher=publisher, subscriber=subscriber)

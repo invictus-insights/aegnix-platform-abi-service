@@ -50,6 +50,7 @@ def _load_static_subjects() -> Dict[str, Any]:
 
 
 @router.post("/capabilities")
+@router.post("/capabilities/")
 async def declare_capabilities(
     body: CapabilityRequest,
     authorization: str | None = Header(default=None),

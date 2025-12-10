@@ -101,6 +101,7 @@ async def sse_stream(request: Request, topic: str):
 # API Route
 # -------------------------------------------------------------------
 @router.get("/{topic}")
+@router.get("/{topic}/")
 async def subscribe_topic(request: Request,
                           topic: str,
                           authorization: str | None = Header(default=None)):
@@ -122,7 +123,8 @@ async def subscribe_topic(request: Request,
         raise HTTPException(status_code=401, detail="Invalid token")
 
     # ---------------- Keyring lookup ----------------
-    rec = keyring.get_key(ae_id)
+    rec = keyring.get_by_aeid(ae_id)
+    # rec = keyring.get_key(ae_id)
     if not rec:
         raise HTTPException(status_code=403, detail="AE not found in keyring")
     if rec.status != "trusted":

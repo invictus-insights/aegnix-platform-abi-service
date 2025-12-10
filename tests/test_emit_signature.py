@@ -1,11 +1,12 @@
 # test_emit_signature.py
-import base64, json
+
 from fastapi.testclient import TestClient
 from main import app
 import pytest
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.envelope import Envelope
 from aegnix_core.crypto import sign_envelope, ed25519_generate
+from aegnix_core.utils import b64e, b64d
 from aegnix_abi.policy import PolicyEngine
 
 client = TestClient(app)
@@ -50,7 +51,7 @@ def test_emit_requires_valid_signature(tmp_path, monkeypatch):
     # Trust key
     kr = ABIKeyring("db/abi_state.db")
     priv, pub = ed25519_generate()
-    pub_b64 = base64.b64encode(pub).decode()
+    pub_b64 = b64e(pub).decode()
     kr.add_key("fusion_ae", pub_b64)
 
     # Allow policy

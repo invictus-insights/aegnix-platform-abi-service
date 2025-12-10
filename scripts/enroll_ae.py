@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import sys, base64, os
+import sys, os
 from aegnix_core.crypto import ed25519_generate
 from aegnix_core.utils import b64e
 from aegnix_core.storage import SQLiteStorage, KeyRecord
@@ -18,9 +18,9 @@ def main():
     print(f"\n=== Enrolling AE: {ae_id} ===")
 
     # 1. Generate keys
-    priv, pub = ed25519_generate()
-    priv_b64 = base64.b64encode(priv).decode()
-    pub_b64 = b64e(pub)
+    priv_raw, pub_raw = ed25519_generate()
+    priv_b64 = b64e(priv_raw)
+    pub_b64 = b64e(pub_raw)
 
     print(f"[1] Generated new keypair")
     print(f"    Public Key (b64):  {pub_b64}")

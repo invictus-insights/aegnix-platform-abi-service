@@ -16,6 +16,7 @@ session_manager: SessionManager = None
 
 
 @router.post("/register")
+@router.post("/register/")
 def issue_challenge(ae_id: str = Body(..., embed=True)):
     """Issue a cryptographic challenge (nonce) to AE."""
     try:
@@ -27,6 +28,7 @@ def issue_challenge(ae_id: str = Body(..., embed=True)):
         raise HTTPException(status_code=400, detail=str(e))
 
 @router.post("/verify")
+@router.post("/verify/")
 def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
     """
     Verify AE response → Create session → Issue access+refresh tokens.
@@ -39,7 +41,8 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
         # ------------------------------------------------------
         # 1. Check AE record
         # ------------------------------------------------------
-        rec = keyring.get_key(ae_id)
+        rec = keyring.get_by_aeid(ae_id)
+        # rec = keyring.get_key(ae_id)
         if not rec or rec.status == "revoked":
             log.warning(f"[VERIFY] AE '{ae_id}' not found or revoked")
             raise HTTPException(status_code=403, detail="AE not allowed")

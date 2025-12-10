@@ -280,13 +280,13 @@ This section is the start of documentation on how to deploy the ABI Service via 
 * using the linux commandline we set env vars as a precursor to the build and deployment of the source 
 ```bash
 DOCKERFILE="Dockerfile"
-JOB_NAME="abi-service-alpha"
+JOB_NAME="sendmygear-abi-service-alpha"
 PROJECT_ID="athena-platform-464120"
 REGION="us-central1"
 REPO="aegnix-framework"
-IMAGE_NAME="abi-service-alpha"
-SERVICE_NAME="abi-service-alpha"
-TAG="v0.05"
+IMAGE_NAME="sendmygear-abi-service-alpha"
+SERVICE_NAME="sendmygear-abi-service-alpha"
+TAG="v1.05"
 ```
 
 **Authenticate Docker with Artifact Registry**
@@ -338,6 +338,17 @@ gcloud run deploy $SERVICE_NAME \
   --project=$PROJECT_ID \
   --set-env-vars=ABI_JWT_SECRET="change_me"
 
+```
+
+SENDMYGEAR
+```bash
+gcloud run deploy $SERVICE_NAME \
+  --image=$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG \
+  --region=$REGION \
+  --platform=managed \
+  --no-allow-unauthenticated \
+  --project=$PROJECT_ID \
+  --set-secrets=ABI_JWT_SECRET=SENDMYGEAR_ABI_JWT_SECRET:latest
 ```
 
 ---
