@@ -1,5 +1,6 @@
 # abi_service/routes/subscribe.py
 import asyncio, json
+from typing import cast
 from fastapi import APIRouter, Request, HTTPException, Header
 from fastapi.responses import StreamingResponse
 from aegnix_core.logger import get_logger
@@ -7,12 +8,17 @@ from bus import bus
 from auth import verify_token
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.policy import PolicyEngine
-
+from runtime_registry import RuntimeRegistry
 router = APIRouter()
 log = get_logger("ABI.Subscribe", to_file="logs/abi_service.log")
 
-keyring: ABIKeyring | None = None
-policy: PolicyEngine | None = None
+# injected from main.py
+runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
+session_manager = None
+
+keyring: ABIKeyring = cast(ABIKeyring, None)
+policy: PolicyEngine = cast(PolicyEngine, None)
+
 
 # topic → set of asyncio.Queue
 subscribers: dict[str, set[asyncio.Queue]] = {}
@@ -118,7 +124,14 @@ async def subscribe_topic(request: Request,
     try:
         claims = verify_token(token)
         ae_id = claims.get("sub")
+
+        session_id = claims.get("sid")
+
         jwt_roles = claims.get("roles", "")
+
+        # Track AE liveness
+        runtime_registry.touch(ae_id, session_id=session_id)
+
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")
 

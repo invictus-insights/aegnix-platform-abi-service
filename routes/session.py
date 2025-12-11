@@ -6,12 +6,13 @@ from aegnix_core.logger import get_logger
 from auth import verify_token, issue_access_token, ACCESS_TTL
 from sessions import SessionManager
 
+
 router = APIRouter()
 log = get_logger("ABI.SessionRoutes")
 
 # Injected from main.py
 session_manager: SessionManager = None
-
+runtime_registry = None
 
 # --------------------------------------------------------------------------
 # Helper: Extract Bearer <token>

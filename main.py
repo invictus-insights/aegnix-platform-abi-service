@@ -11,8 +11,13 @@ from aegnix_abi.admission import AdmissionService
 from aegnix_abi.policy import PolicyEngine
 from aegnix_core.logger import get_logger
 
-from routes import admin, audit, register, emit, subscribe, capabilities as capabilities_route
+from routes import admin, audit, session, register, emit, subscribe, capabilities as capabilities_route
 from routes import emit as emit_route
+
+from runtime_registry import RuntimeRegistry
+from abi_state import ABIState
+from routes import admin_runtime
+
 
 
 # ------------------------------------------------------------------------------
@@ -125,23 +130,67 @@ def watch_policy(interval=5):
 @app.on_event("startup")
 async def startup():
     import asyncio
-    from abi_state import init_abi_state
+    # from abi_state import init_abi_state
 
     subscribe.set_main_loop(asyncio.get_running_loop())
 
     # Initialize global session manager with shared SQLite DB
-    init_abi_state(store)
+    # init_abi_state(store)
 
-    # Install SessionManager into the register router
+    # ----------------------------------------------------------
+    # Create SessionManager & Runtime
+    # ----------------------------------------------------------
     from sessions import SessionManager
     session_manager = SessionManager(store)
+    # runtime = RuntimeRegistry()
 
-    # Inject into register route
+    # ----------------------------------------------------------
+    # Build ABI State Object
+    # ----------------------------------------------------------
+    global state
+    state = ABIState(
+        keyring=keyring,
+        session_manager=session_manager,
+        bus=None,  # (Phase-5 will supply actual Transport)
+        policy=policy_engine
+    )
+
+    # extract runtime registry
+    runtime = state.runtime_registry
+
+    # ----------------------------------------------------------
+    # Inject state into routes
+    # ----------------------------------------------------------
     register.session_manager = session_manager
+    register.runtime_registry = runtime
 
-    log.info("ABI Service started with unified SQLite state")
+    session.session_manager = session_manager
+    session.runtime_registry = runtime
+
+    emit.session_manager = session_manager
+    emit.runtime_registry = runtime
+
+    subscribe.session_manager = session_manager
+    subscribe.runtime_registry = runtime
+
+    capabilities_route.session_manager = session_manager
+    capabilities_route.runtime_registry = runtime
+
+    # Admin runtime views
+    admin_runtime.abi_state = state
+
+    log.info("ABI Service started with unified state (SessionManager + RuntimeRegistry)")
     log.info(f"Static Policy Path: {STATIC_POLICY_PATH}")
 
+    # Inject into register route
+    # register.session_manager = session_manager
+
+    # log.info("ABI Service started with unified SQLite state")
+    # log.info(f"Static Policy Path: {STATIC_POLICY_PATH}")
+
+    # ----------------------------------------------------------
+    # Start policy watcher thread
+    # ----------------------------------------------------------
     threading.Thread(target=watch_policy, daemon=True).start()
 
 # ------------------------------------------------------------------------------
@@ -154,6 +203,8 @@ app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])
 app.include_router(subscribe.router, prefix="/subscribe", tags=["subscribe"])
 app.include_router(capabilities_route.router, tags=["capabilities"])
+app.include_router(admin_runtime.router, prefix="/admin/runtime", tags=["runtime"])
+
 
 
 @app.get("/healthz")

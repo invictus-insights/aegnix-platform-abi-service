@@ -14,8 +14,8 @@ subjects:
     labels: [SECRET]
 
   fusion.topic:
-    pubs: [fusion_ae]
-    subs: [test_sse_ae]
+    pubs: [fusion_ae, phase4_ae, phase4_pub]
+    subs: [test_sse_ae, phase4_ae, phase4_sub]
     labels: [default]
 
   hello.world:

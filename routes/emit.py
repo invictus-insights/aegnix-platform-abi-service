@@ -56,10 +56,14 @@ from aegnix_abi.keyring import ABIKeyring
 from bus import bus
 from auth import verify_token
 
+# injected by main.py
+runtime_registry = None
+session_manager = None
 
 # ---------------------------------------------------------------------
 # Setup
 # ---------------------------------------------------------------------
+
 
 router = APIRouter()  # FastAPI router for the ABI emit service
 
@@ -216,6 +220,10 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         # --- Audit & Dispatch -----------------------------------------
         # include per-AE session ID from JWT for traceability
         session_id = claims.get("sid")
+
+        # --- NEW: runtime registry touch (AE is alive)
+        runtime_registry.touch(ae_id, session_id=session_id)
+
         audit.log_event(EVENT_RECEIVED, {
             "ts": now_ts(), "producer": env.producer,
             "session_id": session_id, "subject": env.subject,

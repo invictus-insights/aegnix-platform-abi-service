@@ -5,6 +5,7 @@ from aegnix_abi.admission import AdmissionService
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.logger import get_logger
 from aegnix_core.storage import load_storage_provider
+from runtime_registry import runtime_registry
 
 from sessions import SessionManager
 from auth import ACCESS_TTL, issue_access_token
@@ -75,6 +76,9 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
             metadata={"roles": roles}
         )
 
+        # Track runtime heartbeat
+        runtime_registry.touch(ae_id, session_id=session.id)
+
         # ------------------------------------------------------
         # 5. Create Refresh Token (Phase 4A)
         # ------------------------------------------------------
@@ -112,54 +116,3 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
         log.error({"event": "verify_error", "ae_id": ae_id, "error": str(e)})
         raise HTTPException(status_code=500, detail=str(e))
 
-
-# @router.post("/verify")
-# def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
-#     """
-#     Verify AE’s signed response to challenge and issue a session grant.
-#
-#     1. Confirm AE exists (and is not revoked) in keyring.
-#     2. Validate signature against stored nonce via AdmissionService.
-#     3. Issue a short-lived JWT grant if verified.
-#
-#     Roles:
-#         - Read from keyring.rec.roles if present.
-#         - Default to "producer" if empty.
-#         - Roles are metadata for now; policy remains the true gatekeeper.
-#     """
-#     try:
-#         # Retrieve AE key record
-#         rec = keyring.get_key(ae_id)
-#         if not rec or rec.status == "revoked":
-#             log.warning(f"[VERIFY] AE '{ae_id}' not found or revoked")
-#             raise HTTPException(status_code=403, detail="AE not allowed")
-#         # if not rec or rec.status != "trusted":
-#         #     log.warning(f"[VERIFY] AE '{ae_id}' not trusted or not found")
-#         #     raise HTTPException(status_code=403, detail="AE not trusted")
-#
-#         # Validate signature through AdmissionService
-#         ok, reason = admission.verify_response(ae_id, signed_nonce_b64)
-#         log.info({"event": "verify_result", "ae_id": ae_id, "verified": ok})
-#         if not ok:
-#             return {"ae_id": ae_id, "verified": False, "reason": reason}
-#
-#         # Roles from keyring
-#         roles = getattr(rec, "roles", "") or "producer"
-#
-#         # Issue short-lived JWT session token
-#         now = int(time.time())
-#         token = jwt.encode(
-#             {"sub": ae_id, "roles": roles, "iat": now, "exp": now + JWT_TTL},
-#             JWT_SECRET,
-#             algorithm="HS256"
-#         )
-#
-#         log.info(f"[VERIFY] AE '{ae_id}' verified successfully — JWT issued")
-#
-#         return {"ae_id": ae_id, "verified": True, "reason": "verified", "grant": token}
-#
-#     except HTTPException:
-#         raise
-#     except Exception as e:
-#         log.error({"event": "verify_error", "ae_id": ae_id, "error": str(e)})
-#         raise HTTPException(status_code=500, detail=str(e))

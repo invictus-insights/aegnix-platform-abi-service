@@ -16,6 +16,9 @@ from aegnix_core.storage import StorageProvider
 from aegnix_abi.policy import PolicyEngine
 from auth import verify_token  # same JWT verifier used by /emit
 
+from runtime_registry import RuntimeRegistry
+runtime_registry: RuntimeRegistry | None = None
+
 
 router = APIRouter(prefix="/ae", tags=["capabilities"])
 
@@ -100,6 +103,10 @@ async def declare_capabilities(
     ae_id = claims.get("sub")
     if not ae_id:
         raise HTTPException(status_code=401, detail="Token missing subject (sub)")
+
+    # --- Runtime activity touch ---
+    if runtime_registry is not None:
+        runtime_registry.touch(ae_id, session_id=claims.get("sid"))
 
     log.info(
         {

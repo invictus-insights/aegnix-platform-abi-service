@@ -12,8 +12,11 @@ from aegnix_core.logger import get_logger
 router = APIRouter()
 log = get_logger("ABI.Service", to_file="logs/abi_service.log")
 
-@router.post("")
-@router.post("/")
+
+# --------------------------------------------------------------
+# POST /audit/append  → append audit event
+# --------------------------------------------------------------
+@router.post("/append")
 async def append_audit(req: Request):
     """Append a signed audit event to local storage."""
     payload = await req.json()
@@ -26,8 +29,11 @@ async def append_audit(req: Request):
     log.info(entry)
     return {"status": "logged", "event_type": event_type}
 
-@router.post("")
-@router.post("/")
+
+# --------------------------------------------------------------
+# GET /audit/list  → return mock list for now
+# --------------------------------------------------------------
+@router.get("/list")
 def list_audit(limit: int = 20):
     """
     Retrieve recent log entries (mocked for now).
