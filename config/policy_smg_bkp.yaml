@@ -1,0 +1,48 @@
+subjects:
+
+  sendmygear.payment.request:
+    pubs: [sendmygear_agent_ae]
+    subs: [sendmygear_payment_mcp_ae]
+
+  sendmygear.payment.result:
+    pubs: [sendmygear_payment_mcp_ae]
+    subs: [sendmygear_agent_ae]
+
+  sendmygear.ups.request:
+    pubs: [sendmygear_agent_ae]
+    subs: [sendmygear_ups_mcp_ae]
+
+  sendmygear.ups.result:
+    pubs: [sendmygear_ups_mcp_ae]
+    subs: [sendmygear_agent_ae]
+
+  sendmygear.agent.result:
+    pubs: [sendmygear_agent_ae]
+    subs: [api_client, uix_client]
+
+  seed.agent.request:
+    pubs: [seed_ae]
+    subs: []
+
+
+roles:
+  sendmygear_agent_role:
+    publish:
+      - "sendmygear.payment.request"
+      - "sendmygear.ups.request"
+      - "sendmygear.agent.result"
+    subscribe:
+      - "sendmygear.payment.result"
+      - "sendmygear.ups.result"
+
+  sendmygear_payment_role:
+    publish:
+      - "sendmygear.payment.result"
+    subscribe:
+      - "sendmygear.payment.request"
+
+  sendmygear_ups_role:
+    publish:
+      - "sendmygear.ups.result"
+    subscribe:
+      - "sendmygear.ups.request"

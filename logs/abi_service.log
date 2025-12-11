@@ -1,0 +1,32 @@
+{"ts": "2025-12-10T23:34:23Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:34:23Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified SQLite state"}
+{"ts": "2025-12-10T23:34:23Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:34:23Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-10T23:34:23Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-10T23:35:35Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:35:35Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified SQLite state"}
+{"ts": "2025-12-10T23:35:35Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:35:35Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-10T23:35:35Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-10T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified SQLite state"}
+{"ts": "2025-12-10T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-10T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-10T23:35:42Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-11T00:12:52Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:12:52Z", "level": "WARNING", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_unknown_subjects', 'ae_id': 'sdk_test_ae', 'unknown': ['sdk.test', 'sdk.test.reply']}"}
+{"ts": "2025-12-11T00:12:53Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:12:53Z", "level": "WARNING", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_unknown_subjects', 'ae_id': 'sdk_test_ae', 'unknown': ['sdk.test', 'sdk.test.reply']}"}
+{"ts": "2025-12-11T00:16:43Z", "level": "ERROR", "name": "ABI.Service", "msg": "[ABI] Policy watcher error: [WinError 2] The system cannot find the file specified: 'E:\\git\\invictus_insights\\platform\\abi_service\\config\\policy.yaml'"}
+{"ts": "2025-12-11T00:16:48Z", "level": "ERROR", "name": "ABI.Service", "msg": "[ABI] Policy watcher error: [WinError 2] The system cannot find the file specified: 'E:\\git\\invictus_insights\\platform\\abi_service\\config\\policy.yaml'"}
+{"ts": "2025-12-11T00:16:53Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-11T00:16:58Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-11T00:16:58Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified SQLite state"}
+{"ts": "2025-12-11T00:16:58Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-11T00:16:58Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-11T00:16:58Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-11T00:17:05Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:17:05Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:17:06Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:17:06Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-11T00:17:08Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}

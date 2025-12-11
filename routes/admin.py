@@ -3,12 +3,15 @@ import os
 from aegnix_core.utils import now_ts
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.policy import PolicyEngine
-
+from aegnix_core.storage import load_storage_provider
 
 
 policy = PolicyEngine()
 router = APIRouter()
-keyring = ABIKeyring(db_path="db/abi_state.db")
+store = load_storage_provider()
+keyring = ABIKeyring(store)
+# keyring = ABIKeyring(db_path="db/abi_state.db")
+
 
 ADMIN_TOKEN = os.getenv("ADMIN_TOKEN", "supersecretadminkey123")
 

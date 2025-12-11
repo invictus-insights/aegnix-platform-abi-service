@@ -4,13 +4,16 @@ from fastapi import APIRouter, HTTPException, Body
 from aegnix_abi.admission import AdmissionService
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.logger import get_logger
+from aegnix_core.storage import load_storage_provider
 
 from sessions import SessionManager
 from auth import ACCESS_TTL, issue_access_token
 
 router = APIRouter()
 log = get_logger("ABI.Register")
-keyring = ABIKeyring(db_path="db/abi_state.db")
+store = load_storage_provider()
+keyring = ABIKeyring(store)
+# keyring = ABIKeyring(db_path="db/abi_state.db")
 admission = AdmissionService(keyring)
 session_manager: SessionManager = None
 

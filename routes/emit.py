@@ -67,7 +67,6 @@ log = get_logger("ABI.Emit", to_file="logs/abi_service.log")  # Central logger
 policy = PolicyEngine()                                       # Policy engine
 audit = AuditLogger(file_path="logs/abi_audit.log")           # Audit logger
 keyring: Optional[ABIKeyring] = None
-# keyring = ABIKeyring(db_path="db/abi_state.db")               # Trusted key store
 
 # Standardized audit event labels
 EVENT_POLICY_DENY = "emit_blocked_policy"

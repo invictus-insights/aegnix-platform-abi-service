@@ -4,7 +4,8 @@ from fastapi import FastAPI
 import os, threading, time, yaml
 from pathlib import Path
 
-from aegnix_core.storage import SQLiteStorage
+# from aegnix_core.storage import SQLiteStorage
+from aegnix_core.storage import load_storage_provider
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.admission import AdmissionService
 from aegnix_abi.policy import PolicyEngine
@@ -27,8 +28,11 @@ log = get_logger("ABI.Service", to_file="logs/abi_service.log")
 # Consistent DB path
 DB_PATH = "db/abi_state.db"
 
-store = SQLiteStorage(DB_PATH)
-keyring = ABIKeyring(db_path=DB_PATH)
+# store = SQLiteStorage(DB_PATH)
+store = load_storage_provider()
+# store = load_storage_provider({"provider": "sqlite", "sqlite_path": DB_PATH})
+# keyring = ABIKeyring(db_path=DB_PATH)
+keyring = ABIKeyring(store)
 emit.keyring = keyring
 subscribe.keyring = keyring
 admission = AdmissionService(keyring)

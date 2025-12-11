@@ -11,7 +11,8 @@ from pydantic import BaseModel, Field
 
 from aegnix_core.capabilities import AECapability
 from aegnix_core.logger import get_logger
-from aegnix_core.storage import SQLiteStorage
+# from aegnix_core.storage import SQLiteStorage
+from aegnix_core.storage import StorageProvider
 from aegnix_abi.policy import PolicyEngine
 from auth import verify_token  # same JWT verifier used by /emit
 
@@ -21,7 +22,8 @@ router = APIRouter(prefix="/ae", tags=["capabilities"])
 log = get_logger("ABI.Capabilities", to_file="logs/abi_service.log")
 
 # These will be injected from main.py
-store: Optional[SQLiteStorage] = None
+# store: Optional[SQLiteStorage] = None
+store: Optional[StorageProvider] = None
 policy_engine: Optional[PolicyEngine] = None
 STATIC_POLICY_PATH: Optional[Path] = None
 
