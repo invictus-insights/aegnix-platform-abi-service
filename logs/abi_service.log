@@ -374,3 +374,77 @@
 {"ts": "2025-12-11T23:44:15Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Cancelled client for topic=fusion.topic"}
 {"ts": "2025-12-11T23:44:15Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
 {"ts": "2025-12-11T23:44:16Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:11:10Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:11:10Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:11:10Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:11:10Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:11:10Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:11:58Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:11:58Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:11:58Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:11:58Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:11:58Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:12:36Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:12:36Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:12:36Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:12:36Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:12:36Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x000001E4F975F050>"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:19:05Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "[DEBUG] emit module loaded with runtime_registry=None"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x000002C643B6FB90>"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:20:00Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Emit", "msg": "[DEBUG] emit module loaded with runtime_registry=None"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x00000264FF3BC850>"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:20:17Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Emit", "msg": "[DEBUG] emit module loaded with runtime_registry=None"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x0000027665DDCC50>"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:23:38Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Emit", "msg": "[DEBUG] emit module loaded with runtime_registry=None"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x0000026358558E50>"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-12T00:33:26Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_ae', 'roles': 'producer'}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_ae', 'db_path': '?', 'pubkey_b64_prefix': 'F61o2yvLAJisbT2J', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 109, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b22747261636b5f6964223a224532452d46'}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '064c7a5a2f118f110f7e48a29cfff807fc86b2a431f4f90145b1e76c7bb3714a'}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'runtime_touch', 'ae_id': 'phase4_ae', 'session_id': '8af6e959-0c91-439f-9074-673d92b1b187'}"}
+{"ts": "2025-12-12T00:36:47Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 109, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-12T00:36:51Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:37:00Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Bus bridge registered for topic=fusion.topic"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_pub', 'roles': 'producer'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_pub', 'db_path': '?', 'pubkey_b64_prefix': '3d8fET5MrTsf91SI', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 99, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b2268656c6c6f223a22776f726c64227d2c'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '1c030c2b208be61b00bbb1fec5630cb79c67942f53a0f3e9936ac3e550953b2f'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'runtime_touch', 'ae_id': 'phase4_pub', 'session_id': 'e383e7ac-9782-477c-9f2f-d9cebb26919f'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 99, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Cancelled client for topic=fusion.topic"}
+{"ts": "2025-12-12T00:37:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-12-12T00:37:06Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}

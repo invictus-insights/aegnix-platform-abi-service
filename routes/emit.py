@@ -42,7 +42,7 @@ Raises:
 
 import hashlib
 from fastapi import APIRouter, Request, HTTPException, Header, Depends
-from typing import Optional
+from typing import Optional, cast
 from aegnix_core.logger import get_logger
 from aegnix_core.utils import now_ts, b64d
 from aegnix_core.envelope import Envelope
@@ -55,10 +55,19 @@ from aegnix_abi.keyring import ABIKeyring
 
 from bus import bus
 from auth import verify_token
+from runtime_registry import RuntimeRegistry
+
+
+
+
 
 # injected by main.py
-runtime_registry = None
+runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
 session_manager = None
+
+log = get_logger("ABI.Emit", to_file="logs/abi_service.log")
+log.info(f"[DEBUG] emit module loaded with runtime_registry={runtime_registry}")
+
 
 # ---------------------------------------------------------------------
 # Setup
@@ -222,7 +231,20 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         session_id = claims.get("sid")
 
         # --- NEW: runtime registry touch (AE is alive)
-        runtime_registry.touch(ae_id, session_id=session_id)
+        if runtime_registry is None:  # type: ignore[truthy-function]
+            log.error({
+                "event": "runtime_touch_missing",
+                "ae_id": ae_id,
+                "session_id": session_id,
+                "reason": "runtime_registry_is_none"
+            })
+        else:
+            runtime_registry.touch(ae_id, session_id=session_id)
+            log.info({
+                "event": "runtime_touch",
+                "ae_id": ae_id,
+                "session_id": session_id,
+            })
 
         audit.log_event(EVENT_RECEIVED, {
             "ts": now_ts(), "producer": env.producer,

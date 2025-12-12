@@ -1,10 +1,11 @@
 # abi_service : main.py Phase 3G
+import sys
+print("Loaded modules:", list(sys.modules.keys()))
 
 from fastapi import FastAPI
 import os, threading, time, yaml
 from pathlib import Path
 
-# from aegnix_core.storage import SQLiteStorage
 from aegnix_core.storage import load_storage_provider
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.admission import AdmissionService
@@ -12,7 +13,7 @@ from aegnix_abi.policy import PolicyEngine
 from aegnix_core.logger import get_logger
 
 from routes import admin, audit, session, register, emit, subscribe, capabilities as capabilities_route
-from routes import emit as emit_route
+# from routes import emit as emit_route
 
 from runtime_registry import RuntimeRegistry
 from abi_state import ABIState
@@ -70,7 +71,7 @@ def build_effective_policy():
     engine = PolicyEngine(static_policy=static, ae_caps=caps)
 
     # Update emit route
-    emit_route.policy = engine
+    emit.policy = engine
 
     # Update subscribe route
     subscribe.policy = engine
@@ -169,6 +170,7 @@ async def startup():
 
     emit.session_manager = session_manager
     emit.runtime_registry = runtime
+    log.info(f"Injecting runtime_registry into emit: {emit.runtime_registry}")
 
     subscribe.session_manager = session_manager
     subscribe.runtime_registry = runtime
