@@ -22,8 +22,6 @@ class ABIState:
         self.session_manager = session_manager
         self.bus = bus
         self.policy = policy
-
-        # NEW — Track AE liveness (emit, subscribe, heartbeat)
         self.runtime_registry = RuntimeRegistry()
 
     # ----------------------------------------------------------
@@ -34,11 +32,19 @@ class ABIState:
         self.runtime_registry.touch(ae_id, session_id)
 
     def get_live_agents(self):
-        return self.runtime_registry.get_live_aes()
+        return self.runtime_registry.live
 
     def get_stale_agents(self):
-        return self.runtime_registry.get_stale_aes()
+        return self.runtime_registry.stale
+
+    def get_dead_agents(self):
+        return self.runtime_registry.dead
 
     def get_agent_state(self, ae_id: str):
-        return self.runtime_registry.get(ae_id)
-
+        if ae_id in self.runtime_registry.live:
+            return self.runtime_registry.live[ae_id]
+        if ae_id in self.runtime_registry.stale:
+            return self.runtime_registry.stale[ae_id]
+        if ae_id in self.runtime_registry.dead:
+            return self.runtime_registry.dead[ae_id]
+        return None

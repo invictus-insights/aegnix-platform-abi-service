@@ -131,18 +131,19 @@ def start_runtime_sweeper(runtime_registry, interval: int = 5):
     def _sweeper():
         while True:
             try:
-                stale, dead = runtime_registry.sweep()
+                # stale, dead = runtime_registry.sweep()
+                runtime_registry.sweep()
 
-                if stale:
+                if runtime_registry.stale:
                     log.info({
                         "event": "runtime_sweep_stale",
-                        "ae_ids": stale
+                        "ae_ids": list(runtime_registry.stale.keys())
                     })
 
-                if dead:
+                if runtime_registry.dead:
                     log.info({
                         "event": "runtime_sweep_dead",
-                        "ae_ids": dead
+                        "ae_ids": list(runtime_registry.dead.keys())
                     })
 
             except Exception as e:
