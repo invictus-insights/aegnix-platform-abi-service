@@ -55,18 +55,22 @@ from aegnix_abi.keyring import ABIKeyring
 
 from bus import bus
 from auth import verify_token
-from runtime_registry import RuntimeRegistry
-
+# from runtime_registry import RuntimeRegistry
+from abi_state import ABIState
 
 
 
 
 # injected by main.py
-runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
+# runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
+abi_state: ABIState = cast(ABIState, None)
 session_manager = None
 
 log = get_logger("ABI.Emit", to_file="logs/abi_service.log")
-log.info(f"[DEBUG] emit module loaded with runtime_registry={runtime_registry}")
+log.info({
+    "event": "emit_route_initialized",
+    "heartbeat_provider": "ABIState",
+})
 
 
 # ---------------------------------------------------------------------
@@ -122,12 +126,6 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
                 "roles": roles,
             })
 
-            # log.info({
-            #     "event": "jwt_ok",
-            #     "sub": claims.get("sub"),
-            #     "sid": claims.get("sid"),
-            # })
-
         except HTTPException as e:
             log.error({
                 "event": "jwt_invalid",
@@ -139,10 +137,6 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         except Exception as e:
             log.exception({"event": "jwt_decode_error"})
             raise HTTPException(status_code=401, detail="Invalid token")
-        # try:
-        #     claims = verify_token(token)  # shared auth.py helper
-        # except jwt.PyJWTError as e:
-        #     raise HTTPException(status_code=401, detail=f"Invalid token: {e}")
 
         # --- Parse & rebuild envelope --------------------------------
         raw = await req.json()
@@ -151,8 +145,6 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         # Ensure token subject (sub) matches envelope producer
         if env.producer != ae_id:
             raise HTTPException(status_code=403, detail="Producer mismatch with token")
-        # if env.producer != claims.get("sub"):
-        #     raise HTTPException(status_code=403, detail="Producer mismatch with token")
 
         # --- Trust Verification -------------------------------------
         if keyring is None:
@@ -168,11 +160,6 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
             log.error({"event": "trust_debug", "msg": "AE key not found", "ae_id": env.producer})
             raise HTTPException(status_code=403, detail="AE not found in keyring")
 
-        #
-        # rec = keyring.get_key(env.producer) or keyring.get_key(env.key_id)
-        # if not rec:
-        #
-        #     raise HTTPException(status_code=403, detail="AE not found in keyring")
 
         # --- DEBUG: verify which key is loaded ---
         log.info({
@@ -191,7 +178,6 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
             raise HTTPException(status_code=403, detail="AE not trusted")
 
         # --- Policy Enforcement (Step 3.3) ---------------------------
-        # Roles = keyring override > JWT roles
         effective_roles = (rec.roles or roles)
 
         if not policy.can_publish(env.producer, env.subject, roles=effective_roles):
@@ -230,21 +216,36 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         # include per-AE session ID from JWT for traceability
         session_id = claims.get("sid")
 
-        # --- NEW: runtime registry touch (AE is alive)
-        if runtime_registry is None:  # type: ignore[truthy-function]
+        # --- Phase 4B Step-2: Semantic heartbeat -----------------------
+        if abi_state is None:
             log.error({
-                "event": "runtime_touch_missing",
+                "event": "heartbeat_missing",
                 "ae_id": ae_id,
                 "session_id": session_id,
-                "reason": "runtime_registry_is_none"
+                "reason": "abi_state_not_injected"
             })
         else:
-            runtime_registry.touch(ae_id, session_id=session_id)
-            log.info({
-                "event": "runtime_touch",
-                "ae_id": ae_id,
-                "session_id": session_id,
-            })
+            abi_state.heartbeat(
+                ae_id=ae_id,
+                session_id=session_id,
+                source="emit"
+            )
+
+        # # --- NEW: runtime registry touch (AE is alive)
+        # if runtime_registry is None:  # type: ignore[truthy-function]
+        #     log.error({
+        #         "event": "runtime_touch_missing",
+        #         "ae_id": ae_id,
+        #         "session_id": session_id,
+        #         "reason": "runtime_registry_is_none"
+        #     })
+        # else:
+        #     runtime_registry.touch(ae_id, session_id=session_id)
+        #     log.info({
+        #         "event": "runtime_touch",
+        #         "ae_id": ae_id,
+        #         "session_id": session_id,
+        #     })
 
         audit.log_event(EVENT_RECEIVED, {
             "ts": now_ts(), "producer": env.producer,

@@ -57,6 +57,13 @@ class RuntimeRegistry:
                     self.dead[ae_id] = rec
                     self.stale.pop(ae_id)
 
+    def heartbeat(self, ae_id: str, session_id: str | None = None, source: str = "unknown"):
+        """
+        Record an explicit heartbeat.
+
+        `source` is informational only (emit, subscribe, register, etc.)
+        """
+        self.touch(ae_id, session_id)
 
 # Global singleton (imported in main.py and routes)
 runtime_registry = RuntimeRegistry()
