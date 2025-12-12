@@ -13,9 +13,17 @@ Patch-1: Minimal functional registry
 from dataclasses import dataclass, asdict
 from datetime import datetime, timedelta
 from typing import Dict, Optional
+from enum import Enum
 
 # Consider AE stale if no activity for more than this duration
 STALE_THRESHOLD = timedelta(minutes=5)
+STALE_AFTER = timedelta(seconds=15)
+DEAD_AFTER = timedelta(seconds=60)
+
+class AELifecycle(str, Enum):
+    LIVE = "live"
+    STALE = "stale"
+    DEAD = "dead"
 
 
 @dataclass
@@ -24,13 +32,15 @@ class AERuntimeState:
     last_seen: datetime
     session_id: Optional[str] = None
     last_capability_declared: Optional[datetime] = None
+    lifecycle: AELifecycle = AELifecycle.LIVE
 
-    def is_stale(self) -> bool:
-        return datetime.utcnow() - self.last_seen > STALE_THRESHOLD
+    # def is_stale(self) -> bool:
+    #     return datetime.utcnow() - self.last_seen > STALE_THRESHOLD
 
     def to_dict(self) -> Dict:
         d = asdict(self)
-        d["is_stale"] = self.is_stale()
+        d["lifecycle"] = self.lifecycle.value
+        # d["is_stale"] = self.is_stale()
         d["last_seen"] = self.last_seen.isoformat()
         if self.last_capability_declared:
             d["last_capability_declared"] = self.last_capability_declared.isoformat()
@@ -68,8 +78,35 @@ class RuntimeRegistry:
         else:
             state = self._agents[ae_id]
             state.last_seen = now
+            state.lifecycle = AELifecycle.LIVE
             if session_id:
                 state.session_id = session_id
+
+    def sweep(self):
+        """
+        Phase 4B Step-1:
+        Background lifecycle transitions.
+        """
+        now = datetime.utcnow()
+        newly_stale = []
+        newly_dead = []
+
+        for ae_id, state in self._agents.items():
+
+            # LIVE → STALE
+            if state.lifecycle == AELifecycle.LIVE:
+                if now - state.last_seen > STALE_AFTER:
+                    state.lifecycle = AELifecycle.STALE
+                    newly_stale.append(ae_id)
+
+            # STALE → DEAD
+            elif state.lifecycle == AELifecycle.STALE:
+                if now - state.last_seen > DEAD_AFTER:
+                    state.lifecycle = AELifecycle.DEAD
+                    newly_dead.append(ae_id)
+
+        return newly_stale, newly_dead
+
 
     def update_capability_timestamp(self, ae_id: str):
         """
@@ -110,7 +147,8 @@ class RuntimeRegistry:
         return {
             ae_id: state.to_dict()
             for ae_id, state in self._agents.items()
-            if not state.is_stale()
+            # if not state.is_stale()
+            if state.lifecycle == AELifecycle.LIVE
         }
 
     def get_stale_aes(self):
@@ -120,7 +158,15 @@ class RuntimeRegistry:
         return {
             ae_id: state.to_dict()
             for ae_id, state in self._agents.items()
-            if state.is_stale()
+            # if state.is_stale()
+            if state.lifecycle == AELifecycle.STALE
+        }
+
+    def get_dead_aes(self):
+        return {
+            ae_id: state.to_dict()
+            for ae_id, state in self._agents.items()
+            if state.lifecycle == AELifecycle.DEAD
         }
 
 

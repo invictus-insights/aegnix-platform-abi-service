@@ -124,6 +124,39 @@ def watch_policy(interval=5):
 
         time.sleep(interval)
 
+# ------------------------------------------------------------------------------
+# Start sweeper thread
+# ------------------------------------------------------------------------------
+def start_runtime_sweeper(runtime_registry, interval: int = 5):
+    def _sweeper():
+        while True:
+            try:
+                stale, dead = runtime_registry.sweep()
+
+                if stale:
+                    log.info({
+                        "event": "runtime_sweep_stale",
+                        "ae_ids": stale
+                    })
+
+                if dead:
+                    log.info({
+                        "event": "runtime_sweep_dead",
+                        "ae_ids": dead
+                    })
+
+            except Exception as e:
+                log.error({
+                    "event": "runtime_sweep_error",
+                    "error": str(e)
+                })
+
+            time.sleep(interval)
+
+    t = threading.Thread(target=_sweeper, daemon=True)
+    t.start()
+
+
 
 # --------------------------------------------------------------------------
 # Startup
@@ -158,6 +191,9 @@ async def startup():
 
     # extract runtime registry
     runtime = state.runtime_registry
+
+    # Start runtime sweeper (Phase 4B - Step 1)
+    start_runtime_sweeper(runtime)
 
     # ----------------------------------------------------------
     # Inject state into routes
