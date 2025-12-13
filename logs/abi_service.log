@@ -1442,3 +1442,159 @@
 {"ts": "2025-12-13T14:48:28Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['sdk_test_ae', 'fallback_ae', 'phase4_ae', 'phase4_sub', 'phase4_pub']}"}
 {"ts": "2025-12-13T14:48:33Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['sdk_test_ae', 'fallback_ae', 'phase4_ae', 'phase4_sub', 'phase4_pub']}"}
 {"ts": "2025-12-13T14:48:38Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['sdk_test_ae', 'fallback_ae', 'phase4_ae', 'phase4_sub', 'phase4_pub']}"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_route_initialized', 'heartbeat_provider': 'ABIState'}"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-13T15:23:37Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_ae', 'roles': 'producer'}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_ae', 'db_path': '?', 'pubkey_b64_prefix': 'F61o2yvLAJisbT2J', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 109, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b22747261636b5f6964223a224532452d46'}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '064c7a5a2f118f110f7e48a29cfff807fc86b2a431f4f90145b1e76c7bb3714a'}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 109, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Bus bridge registered for topic=fusion.topic"}
+{"ts": "2025-12-13T15:23:45Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_pub', 'roles': 'producer'}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_pub', 'db_path': '?', 'pubkey_b64_prefix': '3d8fET5MrTsf91SI', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 99, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b2268656c6c6f223a22776f726c64227d2c'}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '1c030c2b208be61b00bbb1fec5630cb79c67942f53a0f3e9936ac3e550953b2f'}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 99, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Cancelled client for topic=fusion.topic"}
+{"ts": "2025-12-13T15:23:46Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-12-13T15:23:47Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T15:23:51Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:51Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:51Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:51Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:52Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:52Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:52Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T15:23:52Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:52Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:53Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:53Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T15:23:57Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T15:24:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub']}"}
+{"ts": "2025-12-13T15:24:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub']}"}
+{"ts": "2025-12-13T15:24:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae']}"}
+{"ts": "2025-12-13T15:24:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:24:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:24:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:24:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:24:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:24:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub']}"}
+{"ts": "2025-12-13T15:25:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:25:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub']}"}
+{"ts": "2025-12-13T15:25:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['fallback_ae']}"}
+{"ts": "2025-12-13T15:25:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae']}"}
+{"ts": "2025-12-13T15:26:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:26:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:27:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:28:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:29:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:30:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:31:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:47Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:52Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:32:57Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:02Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:07Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:12Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:17Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:22Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:27Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:32Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:37Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T15:33:42Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_dead', 'ae_ids': ['phase4_ae', 'phase4_sub', 'phase4_pub', 'sdk_test_ae', 'fallback_ae']}"}

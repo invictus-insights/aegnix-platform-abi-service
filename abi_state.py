@@ -49,21 +49,6 @@ class ABIState:
             quality=quality,
             meta=meta,
         )
-
-    # def heartbeat(self, ae_id: str, session_id: str | None, source: str):
-    #     """
-    #     Semantic liveness signal.
-    #
-    #     source = emit | subscribe | register | explicit
-    #     """
-    #     # self.runtime_registry.touch(ae_id, session_id)
-    #     self.runtime_registry.heartbeat(ae_id, session_id, source=source)
-    #
-    #     # Phase-5+ hooks:
-    #     # - metrics
-    #     # - policy
-    #     # - anomaly detection
-    #     # - audit correlation
     def get_live_agents(self):
         return self.runtime_registry.live
 
@@ -82,5 +67,26 @@ class ABIState:
             return self.runtime_registry.dead[ae_id]
         return None
 
+    @staticmethod
+    def normalize_runtime_record(rec: dict | None):
+        if not rec:
+            return None
+
+        return {
+            "ae_id": rec.get("ae_id"),
+            "session_id": rec.get("session_id"),
+
+            "state": rec.get("state", "unknown"),
+            "first_seen": rec.get("first_seen"),
+            "last_seen": rec.get("last_seen"),
+
+            "last_source": rec.get("last_source"),
+            "last_intent": rec.get("last_intent"),
+            "last_subject": rec.get("last_subject"),
+            "quality": rec.get("quality", "normal"),
+
+            "heartbeat_count": rec.get("heartbeat_count", 0),
+            "meta": rec.get("meta"),
+        }
 
 
