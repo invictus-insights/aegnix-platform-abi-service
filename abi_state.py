@@ -36,6 +36,8 @@ class ABIState:
         Runtime lifecycle events.
         Phase-4: publish to bus (local/in-memory bus for now).
         """
+        import asyncio
+
         if not self.bus:
             return
 
@@ -43,7 +45,11 @@ class ABIState:
 
         try:
             if hasattr(self.bus, "publish"):
-                self.bus.publish(topic, evt)
+                # self.bus.publish(topic, evt)
+                if asyncio.iscoroutinefunction(self.bus.publish):
+                    asyncio.create_task(self.bus.publish(topic, evt))
+                else:
+                    self.bus.publish(topic, evt)
             elif hasattr(self.bus, "emit"):
                 self.bus.emit(topic, evt)
         except RuntimeError as e:
@@ -163,6 +169,8 @@ class ABIState:
         - No persistence
         - No blocking
         """
+        import asyncio
+
         try:
             if not self.bus:
                 return
@@ -171,7 +179,11 @@ class ABIState:
                 return
 
             # Topic is intentionally generic for now
-            self.bus.publish("ae.runtime", event)
+            # self.bus.publish("ae.runtime", event)
+            if asyncio.iscoroutinefunction(self.bus.publish):
+                asyncio.create_task(self.bus.publish("ae.runtime", event))
+            else:
+                self.bus.publish("ae.runtime", event)
 
         except Exception as e:
             # Runtime observability must never break control flow

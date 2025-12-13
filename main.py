@@ -5,6 +5,7 @@ print("Loaded modules:", list(sys.modules.keys()))
 from fastapi import FastAPI
 import os, threading, time, yaml
 from pathlib import Path
+from bus import bus
 
 from aegnix_core.storage import load_storage_provider
 from aegnix_abi.keyring import ABIKeyring
@@ -158,14 +159,24 @@ def start_runtime_sweeper(runtime_registry, interval: int = 5):
     t.start()
 
 
-
 # --------------------------------------------------------------------------
 # Startup
 # --------------------------------------------------------------------------
 @app.on_event("startup")
 async def startup():
     import asyncio
-    # from abi_state import init_abi_state
+    from reflection.sink import ReflectionSink
+    from reflection.store import InMemoryReflectionStore
+
+    reflection_store = InMemoryReflectionStore()
+    reflection_sink = ReflectionSink(reflection_store)
+
+    # Subscribe sink to runtime events
+    if hasattr(bus, "subscribe"):
+        bus.subscribe("ae.runtime")(lambda t, m: reflection_sink.on_event(t, m))
+        bus.subscribe("abi.runtime.transition")(lambda t, m: reflection_sink.on_event(t, m))
+    log.info("ReflectionSink subscribed to ae.runtime and abi.runtime.transition")
+
 
     subscribe.set_main_loop(asyncio.get_running_loop())
 
@@ -186,7 +197,8 @@ async def startup():
     state = ABIState(
         keyring=keyring,
         session_manager=session_manager,
-        bus=None,  # (Phase-5 will supply actual Transport)
+        # bus=None,  # (Phase-5 will supply actual Transport)
+        bus=bus,
         policy=policy_engine
     )
 
