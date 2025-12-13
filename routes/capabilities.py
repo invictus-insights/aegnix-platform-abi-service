@@ -1,5 +1,4 @@
 # routes/capabilities.py
-# routes/capabilities.py
 
 from __future__ import annotations
 from pathlib import Path
@@ -16,8 +15,12 @@ from aegnix_core.storage import StorageProvider
 from aegnix_abi.policy import PolicyEngine
 from auth import verify_token  # same JWT verifier used by /emit
 
-from runtime_registry import RuntimeRegistry
-runtime_registry: RuntimeRegistry | None = None
+# from runtime_registry import RuntimeRegistry
+# runtime_registry: RuntimeRegistry | None = None
+from abi_state import ABIState
+from typing import cast
+
+abi_state: ABIState = cast(ABIState, None)
 
 
 router = APIRouter(prefix="/ae", tags=["capabilities"])
@@ -104,9 +107,26 @@ async def declare_capabilities(
     if not ae_id:
         raise HTTPException(status_code=401, detail="Token missing subject (sub)")
 
-    # --- Runtime activity touch ---
-    if runtime_registry is not None:
-        runtime_registry.touch(ae_id, session_id=claims.get("sid"))
+    # --- Phase 4B Step-2: Semantic heartbeat ---
+    session_id = claims.get("sid")
+
+    if abi_state is None:
+        log.error({
+            "event": "heartbeat_missing",
+            "ae_id": ae_id,
+            "session_id": session_id,
+            "source": "capabilities"
+        })
+    else:
+        abi_state.heartbeat(
+            ae_id=ae_id,
+            session_id=session_id,
+            source="capabilities"
+        )
+
+    # # --- Runtime activity touch ---
+    # if runtime_registry is not None:
+    #     runtime_registry.touch(ae_id, session_id=claims.get("sid"))
 
     log.info(
         {

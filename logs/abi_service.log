@@ -1008,3 +1008,74 @@
 {"ts": "2025-12-12T23:52:50Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['sdk_test_ae', 'fallback_ae']}"}
 {"ts": "2025-12-12T23:52:55Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['sdk_test_ae', 'fallback_ae']}"}
 {"ts": "2025-12-12T23:53:00Z", "level": "INFO", "name": "ABI.Service", "msg": "{'event': 'runtime_sweep_stale', 'ae_ids': ['sdk_test_ae', 'fallback_ae']}"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_route_initialized', 'heartbeat_provider': 'ABIState'}"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x000001A5CA168690>"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-13T00:30:54Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_route_initialized', 'heartbeat_provider': 'ABIState'}"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x0000019DAC377110>"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-13T00:36:49Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_route_initialized', 'heartbeat_provider': 'ABIState'}"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x0000017E5D208A10>"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-13T00:54:04Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T00:54:09Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'sdk_test_ae', 'session_id': '0ca2f95a-28b9-44ad-aee4-a6498a4f1b4c', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:54:09Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'sdk_test_ae', 'session_id': '0ca2f95a-28b9-44ad-aee4-a6498a4f1b4c', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'sdk_test_ae', 'session_id': 'fcaf8946-7afa-4a75-a69e-9418c3e9d22a', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'sdk_test_ae', 'session_id': 'ff6a18bd-3e3f-49b9-a57a-34873eb75a06', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'sdk_test_ae', 'session_id': '7c70aa04-ba4a-413d-8e64-b8cca78ab6f9', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:10Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'sdk_test_ae', 'publishes': ['sdk.test'], 'subscribes': ['sdk.test.reply']}"}
+{"ts": "2025-12-13T00:54:14Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T00:55:00Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_ae', 'session_id': '99db1339-be2b-4c9c-9fb5-fafdd7dff6f6', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_ae', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_ae', 'roles': 'producer'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_ae', 'db_path': '?', 'pubkey_b64_prefix': 'F61o2yvLAJisbT2J', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 109, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b22747261636b5f6964223a224532452d46'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '064c7a5a2f118f110f7e48a29cfff807fc86b2a431f4f90145b1e76c7bb3714a'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_ae', 'session_id': '99db1339-be2b-4c9c-9fb5-fafdd7dff6f6', 'reason': 'abi_state_not_injected'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 109, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_sub', 'session_id': 'a4516aca-4b61-4596-a68a-f428f7695109', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_sub', 'publishes': [], 'subscribes': ['fusion.topic']}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "ERROR", "name": "ABI.Subscribe", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_sub', 'session_id': 'a4516aca-4b61-4596-a68a-f428f7695109', 'source': 'subscribe'}"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Bus bridge registered for topic=fusion.topic"}
+{"ts": "2025-12-13T00:55:00Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client subscribed to fusion.topic"}
+{"ts": "2025-12-13T00:55:01Z", "level": "ERROR", "name": "ABI.Capabilities", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_pub', 'session_id': '39675969-2a96-4379-8996-d2c11158f781', 'source': 'capabilities'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_request', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Capabilities", "msg": "{'event': 'capabilities_updated', 'ae_id': 'phase4_pub', 'publishes': ['fusion.topic'], 'subscribes': []}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'jwt_ok', 'sub': 'phase4_pub', 'roles': 'producer'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'trust_debug', 'ae_id': 'phase4_pub', 'db_path': '?', 'pubkey_b64_prefix': '3d8fET5MrTsf91SI', 'rec_status': 'trusted'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'to_sign_bytes_len': 99, 'sig_len': 64, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a7b2268656c6c6f223a22776f726c64227d2c'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_hash_debug', 'hash': '1c030c2b208be61b00bbb1fec5630cb79c67942f53a0f3e9936ac3e550953b2f'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "ERROR", "name": "ABI.Emit", "msg": "{'event': 'heartbeat_missing', 'ae_id': 'phase4_pub', 'session_id': '39675969-2a96-4379-8996-d2c11158f781', 'reason': 'abi_state_not_injected'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'sig_debug', 'sig_len': 88, 'subject': 'fusion.topic', 'to_sign_bytes_len': 99, 'first_bytes': '7b226c6162656c73223a5b2264656661756c74225d2c227061796c6f6164223a'}"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Cancelled client for topic=fusion.topic"}
+{"ts": "2025-12-13T00:55:01Z", "level": "INFO", "name": "ABI.Subscribe", "msg": "[SSE] Client disconnected from fusion.topic"}
+{"ts": "2025-12-13T00:55:04Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Emit", "msg": "{'event': 'emit_route_initialized', 'heartbeat_provider': 'ABIState'}"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "Loaded static policy from E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "Injecting runtime_registry into emit: <runtime_registry.RuntimeRegistry object at 0x0000024D64227050>"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "ABI Service started with unified state (SessionManager + RuntimeRegistry)"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "Static Policy Path: E:\git\invictus_insights\platform\abi_service\config\policy.yaml"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Static policy reloaded (YAML changed)"}
+{"ts": "2025-12-13T00:56:06Z", "level": "INFO", "name": "ABI.Service", "msg": "[ABI] Dynamic capabilities updated"}

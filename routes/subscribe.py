@@ -8,12 +8,16 @@ from bus import bus
 from auth import verify_token
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.policy import PolicyEngine
-from runtime_registry import RuntimeRegistry
+# from runtime_registry import RuntimeRegistry
+from abi_state import ABIState
+from typing import cast
+
 router = APIRouter()
 log = get_logger("ABI.Subscribe", to_file="logs/abi_service.log")
 
 # injected from main.py
-runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
+# runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
+abi_state: ABIState = cast(ABIState, None)
 session_manager = None
 
 keyring: ABIKeyring = cast(ABIKeyring, None)
@@ -130,7 +134,21 @@ async def subscribe_topic(request: Request,
         jwt_roles = claims.get("roles", "")
 
         # Track AE liveness
-        runtime_registry.touch(ae_id, session_id=session_id)
+        # runtime_registry.touch(ae_id, session_id=session_id)
+        if abi_state is None:
+            log.error({
+                "event": "heartbeat_missing",
+                "ae_id": ae_id,
+                "session_id": session_id,
+                "source": "subscribe"
+            })
+        else:
+            abi_state.heartbeat(
+                ae_id=ae_id,
+                session_id=session_id,
+                source="subscribe"
+            )
+
 
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid token")

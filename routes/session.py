@@ -5,14 +5,16 @@ from fastapi import APIRouter, HTTPException, Body, Header
 from aegnix_core.logger import get_logger
 from auth import verify_token, issue_access_token, ACCESS_TTL
 from sessions import SessionManager
-
+from abi_state import ABIState
+from typing import cast
 
 router = APIRouter()
 log = get_logger("ABI.SessionRoutes")
 
 # Injected from main.py
 session_manager: SessionManager = None
-runtime_registry = None
+# runtime_registry = None
+abi_state: ABIState = cast(ABIState, None)
 
 # --------------------------------------------------------------------------
 # Helper: Extract Bearer <token>
@@ -112,6 +114,22 @@ def heartbeat(
 
         # last_seen_at
         session_manager.touch(sid)
+
+        ae_id = claims.get("sub")
+
+        if abi_state is None:
+            log.error({
+                "event": "heartbeat_missing",
+                "ae_id": ae_id,
+                "session_id": sid,
+                "source": "session"
+            })
+        else:
+            abi_state.heartbeat(
+                ae_id=ae_id,
+                session_id=sid,
+                source="session"
+            )
 
         return {"ok": True, "sid": sid}
     except ValueError as e:

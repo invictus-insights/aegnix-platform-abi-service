@@ -27,10 +27,6 @@ class ABIState:
     # ----------------------------------------------------------
     # Runtime Convenience
     # ----------------------------------------------------------
-    def touch(self, ae_id: str, session_id: str):
-        """Record a heartbeat/liveness touch event."""
-        self.runtime_registry.touch(ae_id, session_id)
-
     def get_live_agents(self):
         return self.runtime_registry.live
 
@@ -48,3 +44,18 @@ class ABIState:
         if ae_id in self.runtime_registry.dead:
             return self.runtime_registry.dead[ae_id]
         return None
+
+    def heartbeat(self, ae_id: str, session_id: str | None, source: str):
+        """
+        Semantic liveness signal.
+
+        source = emit | subscribe | register | explicit
+        """
+        self.runtime_registry.touch(ae_id, session_id)
+
+        # Phase-5+ hooks:
+        # - metrics
+        # - policy
+        # - anomaly detection
+        # - audit correlation
+

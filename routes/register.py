@@ -5,10 +5,13 @@ from aegnix_abi.admission import AdmissionService
 from aegnix_abi.keyring import ABIKeyring
 from aegnix_core.logger import get_logger
 from aegnix_core.storage import load_storage_provider
-from runtime_registry import runtime_registry
+# from runtime_registry import runtime_registry
+from abi_state import ABIState
+from typing import cast
 
 from sessions import SessionManager
 from auth import ACCESS_TTL, issue_access_token
+
 
 router = APIRouter()
 log = get_logger("ABI.Register")
@@ -16,6 +19,8 @@ store = load_storage_provider()
 keyring = ABIKeyring(store)
 # keyring = ABIKeyring(db_path="db/abi_state.db")
 admission = AdmissionService(keyring)
+
+abi_state: ABIState = cast(ABIState, None)
 session_manager: SessionManager = None
 
 
@@ -77,7 +82,20 @@ def verify_response(ae_id: str = Body(...), signed_nonce_b64: str = Body(...)):
         )
 
         # Track runtime heartbeat
-        runtime_registry.touch(ae_id, session_id=session.id)
+        # runtime_registry.touch(ae_id, session_id=session.id)
+        if abi_state is None:
+            log.error({
+                "event": "heartbeat_missing",
+                "ae_id": ae_id,
+                "session_id": session.id,
+                "source": "register"
+            })
+        else:
+            abi_state.heartbeat(
+                ae_id=ae_id,
+                session_id=session.id,
+                source="register"
+            )
 
         # ------------------------------------------------------
         # 5. Create Refresh Token (Phase 4A)
