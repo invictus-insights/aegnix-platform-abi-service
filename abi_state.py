@@ -1,6 +1,10 @@
 # abi_state.py — Phase 4 Runtime ABI State Container
 
 from runtime_registry import RuntimeRegistry
+import time
+import logging
+
+log = logging.getLogger("ABI.Runtime")
 
 
 class ABIState:
@@ -38,9 +42,8 @@ class ABIState:
             quality: str = "normal",
             meta: dict | None = None,
     ):
-        # self.runtime_registry.touch(
+        # Update runtime state (authoritative)
         self.runtime_registry.heartbeat(
-
             ae_id=ae_id,
             session_id=session_id,
             source=source,
@@ -49,6 +52,20 @@ class ABIState:
             quality=quality,
             meta=meta,
         )
+
+        # Emit runtime heartbeat event (best-effort)
+        self._emit_runtime_event({
+            "type": "heartbeat",
+            "ae_id": ae_id,
+            "session_id": session_id,
+            "source": source,
+            "intent": intent,
+            "subject": subject,
+            "quality": quality,
+            "meta": meta,
+            "ts": time.time(),
+        })
+
     def get_live_agents(self):
         return self.runtime_registry.live
 
@@ -88,5 +105,56 @@ class ABIState:
             "heartbeat_count": rec.get("heartbeat_count", 0),
             "meta": rec.get("meta"),
         }
+
+    # ----------------------------------------------------------
+    # Runtime → Event Hook (Phase 4.4)
+    # ----------------------------------------------------------
+    """
+    Runtime Event Contract (Phase 4+)
+    Events emitted on topic: `ae.runtime`
+
+    Base fields:
+    - type: str
+    - ae_id: str
+    - ts: float (epoch seconds)
+
+    Optional fields:
+    - session_id
+    - source
+    - intent
+    - subject
+    - quality
+    - meta
+    - from_state
+    - to_state
+    """
+
+    def _emit_runtime_event(self, event: dict):
+        """
+        Best-effort runtime event emission.
+
+        This is a hook point only.
+        - No guarantees
+        - No persistence
+        - No blocking
+        """
+        try:
+            if not self.bus:
+                return
+
+            if not hasattr(self.bus, "publish"):
+                return
+
+            # Topic is intentionally generic for now
+            self.bus.publish("ae.runtime", event)
+
+        except Exception as e:
+            # Runtime observability must never break control flow
+            log.warning({
+                "event": "runtime_event_emit_failed",
+                "error": str(e),
+                "payload_type": event.get("type"),
+            })
+
 
 
