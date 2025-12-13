@@ -1,0 +1,35 @@
+# =========================
+# Runtime artifacts
+# =========================
+logs/
+db/*.db
+
+# =========================
+# Development-only folders
+# =========================
+tests/
+scripts/
+
+# =========================
+# Python cache / temp
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.venv/
+env/
+
+# =========================
+# OS / editor noise
+# =========================
+.DS_Store
+.idea/
+.vscode/
