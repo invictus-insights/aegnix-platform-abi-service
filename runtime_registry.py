@@ -6,6 +6,7 @@ needs updating
 
 import time
 from threading import Lock
+from typing import Optional, Dict, Any
 
 class RuntimeRegistry:
 
@@ -23,9 +24,13 @@ class RuntimeRegistry:
         self.stale_after = stale_after
         self.dead_after = dead_after
 
-        self.live = {}
-        self.stale = {}
-        self.dead = {}
+        # self.live = {}
+        # self.stale = {}
+        # self.dead = {}
+        self.live: Dict[str, Dict[str, Any]] = {}
+        self.stale: Dict[str, Dict[str, Any]] = {}
+        self.dead: Dict[str, Dict[str, Any]] = {}
+
 
         self._lock = Lock()
 
@@ -36,6 +41,23 @@ class RuntimeRegistry:
                 "last_seen": now,
                 "session_id": session_id,
             }
+            self.stale.pop(ae_id, None)
+            self.dead.pop(ae_id, None)
+
+        # Public semantic API
+
+    def heartbeat(self, ae_id: str, session_id: Optional[str], source: str = "unknown"):
+        now = time.time()
+        with self._lock:
+            rec = self.live.get(ae_id) or self.stale.get(ae_id) or self.dead.get(ae_id) or {}
+            rec.update({
+                "last_seen": now,
+                "session_id": session_id,
+                "last_source": source,
+                "heartbeat_count": int(rec.get("heartbeat_count", 0)) + 1,
+                "first_seen": rec.get("first_seen", now),
+            })
+            self.live[ae_id] = rec
             self.stale.pop(ae_id, None)
             self.dead.pop(ae_id, None)
 

@@ -21,6 +21,11 @@ def get_stale():
     return {"stale": abi_state.get_stale_agents()}
 
 
+@router.get("/dead")
+def get_dead():
+    return {"dead": abi_state.get_dead_agents()}
+
+
 @router.get("/all")
 def get_all():
     return {

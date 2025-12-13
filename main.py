@@ -12,7 +12,7 @@ from aegnix_abi.admission import AdmissionService
 from aegnix_abi.policy import PolicyEngine
 from aegnix_core.logger import get_logger
 
-from routes import admin, audit, session, register, emit, subscribe, capabilities as capabilities_route
+from routes import admin, audit, session, register, emit, subscribe, ae_heartbeat,capabilities as capabilities_route
 # from routes import emit as emit_route
 
 from runtime_registry import RuntimeRegistry
@@ -193,6 +193,7 @@ async def startup():
     # extract runtime registry
     runtime = state.runtime_registry
 
+
     # Start runtime sweeper (Phase 4B - Step 1)
     start_runtime_sweeper(runtime)
 
@@ -200,20 +201,20 @@ async def startup():
     # Inject state into routes
     # ----------------------------------------------------------
     register.session_manager = session_manager
-    register.runtime_registry = runtime
+    register.abi_state = state
 
     session.session_manager = session_manager
-    session.runtime_registry = runtime
+    session.abi_state = state
+
 
     emit.session_manager = session_manager
-    emit.runtime_registry = runtime
-    log.info(f"Injecting runtime_registry into emit: {emit.runtime_registry}")
+    emit.abi_state = state
 
     subscribe.session_manager = session_manager
-    subscribe.runtime_registry = runtime
+    subscribe.abi_state = state
 
     capabilities_route.session_manager = session_manager
-    capabilities_route.runtime_registry = runtime
+    capabilities_route.abi_state = state
 
     # Admin runtime views
     admin_runtime.abi_state = state
@@ -221,11 +222,8 @@ async def startup():
     log.info("ABI Service started with unified state (SessionManager + RuntimeRegistry)")
     log.info(f"Static Policy Path: {STATIC_POLICY_PATH}")
 
-    # Inject into register route
-    # register.session_manager = session_manager
-
-    # log.info("ABI Service started with unified SQLite state")
-    # log.info(f"Static Policy Path: {STATIC_POLICY_PATH}")
+    ae_heartbeat.session_manager = session_manager
+    ae_heartbeat.abi_state = state
 
     # ----------------------------------------------------------
     # Start policy watcher thread
@@ -243,6 +241,7 @@ app.include_router(emit.router, prefix="/emit", tags=["emit"])
 app.include_router(subscribe.router, prefix="/subscribe", tags=["subscribe"])
 app.include_router(capabilities_route.router, tags=["capabilities"])
 app.include_router(admin_runtime.router, prefix="/admin/runtime", tags=["runtime"])
+app.include_router(ae_heartbeat.router, tags=["runtime"])
 
 
 
