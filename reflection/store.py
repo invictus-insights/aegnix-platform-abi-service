@@ -1,15 +1,15 @@
 # reflection/store.py
 
 from abc import ABC, abstractmethod
-from reflection.models import ReflectionEvent
+from reflection.models import ReflectionRecord
 
 
 class ReflectionStore(ABC):
 
     @abstractmethod
-    def append(self, event: ReflectionEvent) -> None:
+    def append(self, record: ReflectionRecord) -> None:
         """
-        Persist a reflection event.
+        Persist a reflection record.
         Append-only semantics.
         """
         raise NotImplementedError
@@ -17,10 +17,10 @@ class ReflectionStore(ABC):
 
 class InMemoryReflectionStore(ReflectionStore):
     def __init__(self):
-        self._events: list[ReflectionEvent] = []
+        self._events: list[ReflectionRecord] = []
 
-    def append(self, event: ReflectionEvent) -> None:
+    def append(self, event: ReflectionRecord) -> None:
         self._events.append(event)
 
-    def all(self) -> list[ReflectionEvent]:
+    def all(self) -> list[ReflectionRecord]:
         return list(self._events)

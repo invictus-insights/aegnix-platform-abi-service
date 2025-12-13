@@ -1,6 +1,10 @@
 # reflection/sink.py
 
-from reflection.models import ReflectionEvent
+from reflection.models import (
+    ReflectionRecord,
+    Correlation,
+    Transition,
+)
 from reflection.store import ReflectionStore
 import time
 
@@ -15,40 +19,59 @@ class ReflectionSink:
 
     def on_event(self, topic: str, payload: dict):
         """
-        Generic handler for runtime events.
+        Generic handler for runtime records.
         """
-        evt = self._normalize(topic, payload)
-        if evt:
-            self.store.append(evt)
+        record = self._normalize(topic, payload)
+        if record:
+            self.store.append(record)
 
-    def _normalize(self, topic: str, payload: dict) -> ReflectionEvent | None:
+    def _normalize(self, topic: str, payload: dict) -> ReflectionRecord | None:
         """
-        Convert runtime/bus payload into ReflectionEvent.
+        Convert runtime/bus payload into ReflectionRecord.
         """
         now = time.time()
 
+        ae_id = payload.get("ae_id")
+        session_id = payload.get("session_id")
+
+        correlation = Correlation(
+            ae_id=ae_id,
+            session_id=session_id,
+            confidence="high" if ae_id else "low",
+        )
+
         if topic == "ae.runtime":
-            return ReflectionEvent(
+            return ReflectionRecord(
+                domain="runtime",
                 event_type=topic,
-                ae_id=payload.get("ae_id"),
-                session_id=payload.get("session_id"),
                 ts=payload.get("ts", now),
-                source=payload.get("source"),
                 intent=payload.get("intent"),
                 subject=payload.get("subject"),
+                source={"type": "ae", "id": ae_id},
+                correlation=correlation,
                 quality=payload.get("quality"),
-                meta=payload.get("meta"),
+                payload=payload,
+                labels={"topic": topic},
             )
 
         if topic == "abi.runtime.transition":
-            return ReflectionEvent(
-                event_type=topic,
-                ae_id=payload.get("ae_id"),
-                session_id=payload.get("session_id"),
-                ts=payload.get("ts", now),
+            transition = Transition(
+                name="lifecycle",
                 from_state=payload.get("from_state"),
                 to_state=payload.get("to_state"),
-                meta=payload,
+                reason=payload.get("reason"),
+                ts=payload.get("ts", now),
+            )
+
+            return ReflectionRecord(
+                domain="abi",
+                event_type=topic,
+                ts=payload.get("ts", now),
+                source={"type": "abi"},
+                correlation=correlation,
+                transitions=[transition],
+                payload=payload,
+                labels={"topic": topic},
             )
 
         return None
