@@ -28,6 +28,29 @@ class ABIState:
         self.policy = policy
         self.runtime_registry = RuntimeRegistry()
 
+        # Runtime transitions -> bus
+        self.runtime_registry.set_transition_hook(self._on_runtime_transition)
+
+    def _on_runtime_transition(self, evt: dict):
+        """
+        Runtime lifecycle events.
+        Phase-4: publish to bus (local/in-memory bus for now).
+        """
+        if not self.bus:
+            return
+
+        topic = "abi.runtime.transition"
+
+        try:
+            if hasattr(self.bus, "publish"):
+                self.bus.publish(topic, evt)
+            elif hasattr(self.bus, "emit"):
+                self.bus.emit(topic, evt)
+        except RuntimeError as e:
+            # Transport temporarily unavailable
+            # (safe to drop telemetry)
+            pass
+
     # ----------------------------------------------------------
     # Runtime Convenience
     # ----------------------------------------------------------
@@ -85,12 +108,14 @@ class ABIState:
         return None
 
     @staticmethod
-    def normalize_runtime_record(rec: dict | None):
+    def normalize_runtime_record(rec: dict, ae_id: str | None = None) -> dict:
+    # def normalize_runtime_record(rec: dict | None):
         if not rec:
             return None
 
         return {
-            "ae_id": rec.get("ae_id"),
+            "ae_id": ae_id,
+            # "ae_id": rec.get("ae_id"),
             "session_id": rec.get("session_id"),
 
             "state": rec.get("state", "unknown"),

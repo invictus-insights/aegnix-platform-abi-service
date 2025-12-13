@@ -13,24 +13,24 @@ abi_state: ABIState = cast(ABIState, None)
 @router.get("/live")
 def live():
     return [
-        abi_state._normalize_runtime_record(r)
-        for r in abi_state.get_live_agents().values()
+        abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+        for ae_id, rec in abi_state.get_live_agents().items()
     ]
 
 
 @router.get("/stale")
 def stale():
     return [
-        abi_state.normalize_runtime_record(r)
-        for r in abi_state.get_stale_agents().values()
+        abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+        for ae_id, rec in abi_state.get_stale_agents().items()
     ]
 
 
 @router.get("/dead")
 def dead():
     return [
-        abi_state.normalize_runtime_record(r)
-        for r in abi_state.get_dead_agents().values()
+        abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+        for ae_id, rec in abi_state.get_dead_agents().items()
     ]
 
 
@@ -39,23 +39,23 @@ def agent(ae_id: str):
     rec = abi_state.get_agent_state(ae_id)
     if not rec:
         return {"error": "AE not found"}
-    return abi_state.normalize_runtime_record(rec)
+    return abi_state.normalize_runtime_record(rec, ae_id=ae_id)
 
 
 @router.get("/all")
 def get_all():
     return {
         "live": [
-            ABIState.normalize_runtime_record(r)
-            for r in abi_state.get_live_agents().values()
+            abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+            for ae_id, rec in abi_state.get_live_agents().items()
         ],
         "stale": [
-            ABIState.normalize_runtime_record(r)
-            for r in abi_state.get_stale_agents().values()
+            abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+            for ae_id, rec in abi_state.get_stale_agents().items()
         ],
         "dead": [
-            ABIState.normalize_runtime_record(r)
-            for r in abi_state.get_dead_agents().values()
+            abi_state.normalize_runtime_record(rec, ae_id=ae_id)
+            for ae_id, rec in abi_state.get_dead_agents().items()
         ],
     }
 

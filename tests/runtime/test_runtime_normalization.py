@@ -33,7 +33,8 @@ def test_runtime_normalization():
     )
 
     rec = abi_state.get_agent_state(ae_id)
-    normalized = ABIState.normalize_runtime_record(rec)
+    # normalized = ABIState.normalize_runtime_record(rec)
+    normalized = ABIState.normalize_runtime_record(rec, ae_id=ae_id)
 
     # --- Assert ---
     assert normalized["ae_id"] == ae_id

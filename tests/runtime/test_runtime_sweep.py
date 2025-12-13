@@ -3,10 +3,11 @@
 import time
 from runtime_registry import RuntimeRegistry
 
+
 def test_runtime_sweep_transitions():
     rr = RuntimeRegistry(stale_after=1, dead_after=2)
 
-    rr.touch("ae-1")
+    rr.heartbeat("ae-1", session_id=None, source="test")
     assert "ae-1" in rr.live
 
     time.sleep(1.2)
@@ -16,3 +17,4 @@ def test_runtime_sweep_transitions():
     time.sleep(1.2)
     rr.sweep()
     assert "ae-1" in rr.dead
+
