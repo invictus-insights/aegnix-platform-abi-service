@@ -46,20 +46,60 @@ class RuntimeRegistry:
 
         # Public semantic API
 
-    def heartbeat(self, ae_id: str, session_id: Optional[str], source: str = "unknown"):
+    def heartbeat(
+            self,
+            ae_id: str,
+            session_id: Optional[str],
+            *,
+            source: str = "unknown",
+            intent: str | None = None,
+            subject: str | None = None,
+            quality: str = "normal",
+            meta: dict | None = None,
+    ):
         now = time.time()
         with self._lock:
-            rec = self.live.get(ae_id) or self.stale.get(ae_id) or self.dead.get(ae_id) or {}
+            rec = (
+                    self.live.get(ae_id)
+                    or self.stale.get(ae_id)
+                    or self.dead.get(ae_id)
+                    or {}
+            )
+
             rec.update({
+                "first_seen": rec.get("first_seen", now),
                 "last_seen": now,
                 "session_id": session_id,
+
+                # semantic fields
                 "last_source": source,
+                "last_intent": intent,
+                "last_subject": subject,
+                "quality": quality,
+
+                # counters / metadata
                 "heartbeat_count": int(rec.get("heartbeat_count", 0)) + 1,
-                "first_seen": rec.get("first_seen", now),
+                "meta": meta,
             })
+
             self.live[ae_id] = rec
             self.stale.pop(ae_id, None)
             self.dead.pop(ae_id, None)
+
+    # def heartbeat(self, ae_id: str, session_id: Optional[str], source: str = "unknown"):
+    #     now = time.time()
+    #     with self._lock:
+    #         rec = self.live.get(ae_id) or self.stale.get(ae_id) or self.dead.get(ae_id) or {}
+    #         rec.update({
+    #             "last_seen": now,
+    #             "session_id": session_id,
+    #             "last_source": source,
+    #             "heartbeat_count": int(rec.get("heartbeat_count", 0)) + 1,
+    #             "first_seen": rec.get("first_seen", now),
+    #         })
+    #         self.live[ae_id] = rec
+    #         self.stale.pop(ae_id, None)
+    #         self.dead.pop(ae_id, None)
 
     def sweep(self):
         now = time.time()

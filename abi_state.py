@@ -27,20 +27,43 @@ class ABIState:
     # ----------------------------------------------------------
     # Runtime Convenience
     # ----------------------------------------------------------
-    def heartbeat(self, ae_id: str, session_id: str | None, source: str):
-        """
-        Semantic liveness signal.
+    def heartbeat(
+            self,
+            ae_id: str,
+            session_id: str | None,
+            source: str,
+            *,
+            intent: str | None = None,
+            subject: str | None = None,
+            quality: str = "normal",
+            meta: dict | None = None,
+    ):
+        # self.runtime_registry.touch(
+        self.runtime_registry.heartbeat(
 
-        source = emit | subscribe | register | explicit
-        """
-        # self.runtime_registry.touch(ae_id, session_id)
-        self.runtime_registry.heartbeat(ae_id, session_id, source=source)
+            ae_id=ae_id,
+            session_id=session_id,
+            source=source,
+            intent=intent,
+            subject=subject,
+            quality=quality,
+            meta=meta,
+        )
 
-        # Phase-5+ hooks:
-        # - metrics
-        # - policy
-        # - anomaly detection
-        # - audit correlation
+    # def heartbeat(self, ae_id: str, session_id: str | None, source: str):
+    #     """
+    #     Semantic liveness signal.
+    #
+    #     source = emit | subscribe | register | explicit
+    #     """
+    #     # self.runtime_registry.touch(ae_id, session_id)
+    #     self.runtime_registry.heartbeat(ae_id, session_id, source=source)
+    #
+    #     # Phase-5+ hooks:
+    #     # - metrics
+    #     # - policy
+    #     # - anomaly detection
+    #     # - audit correlation
     def get_live_agents(self):
         return self.runtime_registry.live
 
