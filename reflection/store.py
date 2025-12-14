@@ -1,5 +1,6 @@
 # reflection/store.py
 
+from typing import List
 from abc import ABC, abstractmethod
 from reflection.models import ReflectionRecord
 
@@ -14,6 +15,13 @@ class ReflectionStore(ABC):
         """
         raise NotImplementedError
 
+    @abstractmethod
+    def all(self) -> List[ReflectionRecord]:
+        """
+        Return all reflection records.
+        Read-only view.
+        """
+        raise NotImplementedError
 
 class InMemoryReflectionStore(ReflectionStore):
     def __init__(self):
