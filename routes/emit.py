@@ -47,7 +47,6 @@ from aegnix_core.logger import get_logger
 from aegnix_core.utils import now_ts, b64d
 from aegnix_core.envelope import Envelope
 from aegnix_core.crypto import ed25519_verify
-from aegnix_core.utils import b64d
 from aegnix_core.transport import transport_factory
 from aegnix_abi.policy import PolicyEngine
 from aegnix_abi.audit import AuditLogger

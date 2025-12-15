@@ -168,29 +168,5 @@ class RuntimeRegistry:
         for ae_id, rec, f, t, reason in dead_moves:
             self._emit_transition(ae_id=ae_id, from_state=f, to_state=t, rec=rec, reason=reason)
 
-    # def sweep(self):
-    #     now = time.time()
-    #     with self._lock:
-    #         for ae_id, rec in list(self.live.items()):
-    #             age = now - rec["last_seen"]
-    #
-    #             if age >= self.dead_after:
-    #                 rec["state"] = "dead"
-    #                 self.dead[ae_id] = rec
-    #                 self.live.pop(ae_id)
-    #
-    #             elif age >= self.stale_after:
-    #                 rec["state"] = "stale"
-    #                 self.stale[ae_id] = rec
-    #                 self.live.pop(ae_id)
-    #
-    #         for ae_id, rec in list(self.stale.items()):
-    #             age = now - rec["last_seen"]
-    #             if age >= self.dead_after:
-    #                 rec["state"] = "dead"
-    #                 self.dead[ae_id] = rec
-    #                 self.stale.pop(ae_id)
-
-
 # Global singleton (imported in main.py and routes)
 runtime_registry = RuntimeRegistry()

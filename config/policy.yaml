@@ -19,7 +19,7 @@ subjects:
     labels: [default]
 
   hello.world:
-    pubs: [pub_ae]
+    pubs: [pub_ae, crash_ae]
     subs: [sub_ae]
 
   sdk.test:

@@ -8,9 +8,10 @@ from aegnix_abi.keyring import ABIKeyring
 from aegnix_abi.policy import PolicyEngine
 from aegnix_core.crypto import ed25519_generate
 from aegnix_core.utils import b64e
+from aegnix_core.storage import load_storage_provider
 
-AE_ID = "dev_ae"
-DB_PATH = "db/abi_state.db"
+AE_ID = "sub_ae"
+# DB_PATH = "db/abi_state.db"
 
 
 def main():
@@ -25,12 +26,15 @@ def main():
     print(f"AE ID: {AE_ID}")
 
     # Add developer AE to the keyring
-    ring = ABIKeyring(db_path=DB_PATH)
+    # ring = ABIKeyring(db_path=DB_PATH)
+    store = load_storage_provider()
+    ring = ABIKeyring(store)
+
     rec = ring.add_key(
         ae_id=AE_ID,
         pubkey_b64=pub_b64,
         roles="producer",
-        status="trusted"
+        status="untrusted"
     )
 
     print(f"✓ Added key to keyring. Fingerprint: {rec.pub_key_fpr}")
