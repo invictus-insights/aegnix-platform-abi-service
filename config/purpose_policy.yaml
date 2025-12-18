@@ -1,0 +1,19 @@
+swarm:
+  id: fund-manager-poc
+  domain: financial-belief-ingestion
+
+purpose_policy:
+  inviolables:
+    - id: no_fabricated_beliefs
+      description: "All beliefs must originate from declared external sources"
+
+    - id: provenance_required
+      description: "Every emitted belief must include source and timestamp"
+
+    - id: scope_limited
+      description: "AEs may only act within declared capabilities"
+
+    - id: audit_required
+      description: "All emissions must be auditable"
+
+  enforcement_mode: observe_only

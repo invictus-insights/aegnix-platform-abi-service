@@ -21,11 +21,13 @@ class ABIState:
     Routes will receive this via injection from main.py.
     """
 
-    def __init__(self, keyring, session_manager, bus, policy):
+    def __init__(self, keyring, session_manager, bus, policy, spp=None):
         self.keyring = keyring
         self.session_manager = session_manager
         self.bus = bus
         self.policy = policy
+        self.spp = spp or {}
+        self.operational_profiles = {}  # Phase 5: populated per AE/session
         self.runtime_registry = RuntimeRegistry()
 
         # Runtime transitions -> bus

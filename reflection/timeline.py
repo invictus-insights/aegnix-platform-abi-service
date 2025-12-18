@@ -1,6 +1,18 @@
+# reflection/timeline.py
+
 from typing import List, Optional
 from reflection.models import ReflectionRecord, Transition
 from reflection.store import ReflectionStore
+
+
+def _infer_end_status(transitions: List[Transition]) -> str:
+    """
+    Determine terminal session status from transitions.
+    """
+    for t in reversed(transitions):
+        if t.name in ("dead", "error", "closed"):
+            return t.name
+    return "ended-without-explicit-close"
 
 
 def get_sessions_for_ae(store: ReflectionStore, ae_id: str) -> List[str]:
@@ -42,11 +54,14 @@ def build_session_timeline(
     start_ts: Optional[float] = records[0].ts if records else None
     end_ts: Optional[float] = records[-1].ts if records else None
 
+    end_status = _infer_end_status(transitions)
+
     return {
         "ae_id": ae_id,
         "session_id": session_id,
         "start_ts": start_ts,
         "end_ts": end_ts,
+        "end_status": end_status,
         "records": records,
         "transitions": transitions,
     }

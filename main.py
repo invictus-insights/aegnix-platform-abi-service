@@ -46,8 +46,17 @@ admission = AdmissionService(keyring)
 
 BASE_DIR = os.path.dirname(__file__)
 STATIC_POLICY_PATH = Path(os.path.join(BASE_DIR, "config", "policy.yaml"))
+SPP_PATH = Path(os.path.join(BASE_DIR, "config", "purpose_policy.yaml"))
 
-
+# ------------------------------------------------------------------------------
+# Swarm Purpose Policy Loader
+# ------------------------------------------------------------------------------
+def load_spp():
+    try:
+        return yaml.safe_load(SPP_PATH.read_text()) or {}
+    except Exception as e:
+        log.error(f"[ABI] Failed to load SPP: {e}")
+        return {}
 # ------------------------------------------------------------------------------
 # Policy Loaders
 # ------------------------------------------------------------------------------
@@ -129,34 +138,73 @@ def watch_policy(interval=5):
 # Start sweeper thread
 # ------------------------------------------------------------------------------
 def start_runtime_sweeper(runtime_registry, interval: int = 5):
+    logged_stale = set()
+    logged_dead = set()
+
     def _sweeper():
+        nonlocal logged_stale, logged_dead
+
         while True:
             try:
-                # stale, dead = runtime_registry.sweep()
                 runtime_registry.sweep()
 
-                if runtime_registry.stale:
-                    log.info({
-                        "event": "runtime_sweep_stale",
-                        "ae_ids": list(runtime_registry.stale.keys())
-                    })
+                # --- log stale only when newly stale ---
+                stale_now = set(runtime_registry.stale.keys())
+                new_stale = stale_now - logged_stale
+                if new_stale:
+                    log.info({"event": "runtime_sweep_stale", "ae_ids": list(new_stale)})
+                    logged_stale |= new_stale
 
-                if runtime_registry.dead:
-                    log.info({
-                        "event": "runtime_sweep_dead",
-                        "ae_ids": list(runtime_registry.dead.keys())
-                    })
+                # Remove recovered from logged set (optional)
+                logged_stale &= stale_now
+
+                # --- log dead only when newly dead ---
+                dead_now = set(runtime_registry.dead.keys())
+                new_dead = dead_now - logged_dead
+                if new_dead:
+                    log.info({"event": "runtime_sweep_dead", "ae_ids": list(new_dead)})
+                    logged_dead |= new_dead
+
+                # If a dead AE ever returns (heartbeat), allow it to log again
+                logged_dead &= dead_now
 
             except Exception as e:
-                log.error({
-                    "event": "runtime_sweep_error",
-                    "error": str(e)
-                })
+                log.error({"event": "runtime_sweep_error", "error": str(e)})
 
             time.sleep(interval)
 
     t = threading.Thread(target=_sweeper, daemon=True)
     t.start()
+
+# def start_runtime_sweeper(runtime_registry, interval: int = 5):
+#     def _sweeper():
+#         while True:
+#             try:
+#                 # stale, dead = runtime_registry.sweep()
+#                 runtime_registry.sweep()
+#
+#                 if runtime_registry.stale:
+#                     log.info({
+#                         "event": "runtime_sweep_stale",
+#                         "ae_ids": list(runtime_registry.stale.keys())
+#                     })
+#
+#                 if runtime_registry.dead:
+#                     log.info({
+#                         "event": "runtime_sweep_dead",
+#                         "ae_ids": list(runtime_registry.dead.keys())
+#                     })
+#
+#             except Exception as e:
+#                 log.error({
+#                     "event": "runtime_sweep_error",
+#                     "error": str(e)
+#                 })
+#
+#             time.sleep(interval)
+#
+#     t = threading.Thread(target=_sweeper, daemon=True)
+#     t.start()
 
 
 # --------------------------------------------------------------------------
@@ -171,17 +219,19 @@ async def startup():
     reflection_store = InMemoryReflectionStore()
     reflection_sink = ReflectionSink(reflection_store)
 
+    # -------------------------------
+    # Load Swarm Purpose Policy
+    # -------------------------------
+    spp = load_spp()
+    log.info("[ABI] Swarm Purpose Policy loaded", extra={"spp": spp})
+
     # Subscribe sink to runtime events
     if hasattr(bus, "subscribe"):
         bus.subscribe("ae.runtime")(lambda t, m: reflection_sink.on_event(t, m))
         bus.subscribe("abi.runtime.transition")(lambda t, m: reflection_sink.on_event(t, m))
     log.info("ReflectionSink subscribed to ae.runtime and abi.runtime.transition")
 
-
     subscribe.set_main_loop(asyncio.get_running_loop())
-
-    # Initialize global session manager with shared SQLite DB
-    # init_abi_state(store)
 
     # ----------------------------------------------------------
     # Create SessionManager & Runtime
@@ -197,14 +247,15 @@ async def startup():
     state = ABIState(
         keyring=keyring,
         session_manager=session_manager,
-        # bus=None,  # (Phase-5 will supply actual Transport)
+        spp=spp,
         bus=bus,
         policy=policy_engine
     )
 
+    log.info("[ABI] Effective SPP attached to state", extra={"spp": state.spp})
+
     # extract runtime registry
     runtime = state.runtime_registry
-
 
     # Start runtime sweeper (Phase 4B - Step 1)
     start_runtime_sweeper(runtime)
@@ -252,6 +303,7 @@ app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])
 app.include_router(subscribe.router, prefix="/subscribe", tags=["subscribe"])
 app.include_router(capabilities_route.router, tags=["capabilities"])
+app.include_router(session.router, prefix="/session", tags=["session"])
 app.include_router(admin_runtime.router, prefix="/admin/runtime", tags=["runtime"])
 app.include_router(ae_heartbeat.router, tags=["runtime"])
 

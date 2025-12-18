@@ -32,5 +32,24 @@ subjects:
     subs: [ sdk_test_ae ]
     labels: [ default ]
 
+  belief.snapshot:
+    pubs: [PolymarketIngestorAE]
+    subs: [BeliefStateAE]
+    labels: [Default]
+
+  belief.state.updated:
+    pubs: [BeliefStateAE]
+    subs: [SignalScorerAE]
+    labels: [Default]
+
+  portfolio.intent.proposed:
+    pubs: [ SignalScorerAE ]
+    subs: [ PortfolioIntentAE ]
+    labels: [ Advisory ]
+
+  portfolio.intent.reviewed:
+    pubs: [ PortfolioIntentAE ]
+    subs: [ HumanReviewAE ]
+
 roles:
   subscriber: {}
