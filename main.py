@@ -13,7 +13,8 @@ from aegnix_abi.admission import AdmissionService
 from aegnix_abi.policy import PolicyEngine
 from aegnix_core.logger import get_logger
 
-from routes import admin, audit, session, register, emit, subscribe, ae_heartbeat,capabilities as capabilities_route
+
+from routes import admin, admin_reflection, audit, session, register, emit, subscribe, ae_heartbeat,capabilities as capabilities_route
 # from routes import emit as emit_route
 
 from runtime_registry import RuntimeRegistry
@@ -176,40 +177,7 @@ def start_runtime_sweeper(runtime_registry, interval: int = 5):
     t = threading.Thread(target=_sweeper, daemon=True)
     t.start()
 
-# def start_runtime_sweeper(runtime_registry, interval: int = 5):
-#     def _sweeper():
-#         while True:
-#             try:
-#                 # stale, dead = runtime_registry.sweep()
-#                 runtime_registry.sweep()
-#
-#                 if runtime_registry.stale:
-#                     log.info({
-#                         "event": "runtime_sweep_stale",
-#                         "ae_ids": list(runtime_registry.stale.keys())
-#                     })
-#
-#                 if runtime_registry.dead:
-#                     log.info({
-#                         "event": "runtime_sweep_dead",
-#                         "ae_ids": list(runtime_registry.dead.keys())
-#                     })
-#
-#             except Exception as e:
-#                 log.error({
-#                     "event": "runtime_sweep_error",
-#                     "error": str(e)
-#                 })
-#
-#             time.sleep(interval)
-#
-#     t = threading.Thread(target=_sweeper, daemon=True)
-#     t.start()
 
-
-# --------------------------------------------------------------------------
-# Startup
-# --------------------------------------------------------------------------
 @app.on_event("startup")
 async def startup():
     import asyncio
@@ -298,6 +266,7 @@ async def startup():
 # ------------------------------------------------------------------------------
 
 app.include_router(admin.router, prefix="/admin", tags=["admin"])
+app.include_router(admin_reflection.router, prefix="/admin/reflect")
 app.include_router(audit.router, prefix="/audit", tags=["audit"])
 app.include_router(register.router, tags=["register"])
 app.include_router(emit.router, prefix="/emit", tags=["emit"])

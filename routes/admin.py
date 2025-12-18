@@ -52,19 +52,6 @@ def delete_key(ae_id: str, x_admin_token: str = Header(...)):
     keyring.store.log_event("key_deleted", {"ae_id": ae_id, "ts": now_ts()})
     return {"status": "deleted", "ae_id": ae_id}
 
-
-# @router.post("/keys/trust")
-# def trust_key(ae_id: str = Body(...)):
-#     rec = keyring.get_key(ae_id)
-#     if not rec:
-#         raise HTTPException(status_code=404, detail="Key not found")
-#     rec.status = "trusted"
-#     keyring.store.upsert_key(rec)
-#     keyring.store.log_event("key_trusted", {"ae_id": ae_id, "ts": now_ts()})
-#     return {"status": "trusted", "ae_id": ae_id}
-#
-
-
 @router.post("/keys/revoke")
 @router.post("/keys/revoke/")
 def revoke_key(ae_id: str = Body(...)):

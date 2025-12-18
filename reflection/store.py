@@ -23,6 +23,7 @@ class ReflectionStore(ABC):
         """
         raise NotImplementedError
 
+
 class InMemoryReflectionStore(ReflectionStore):
     def __init__(self):
         self._events: list[ReflectionRecord] = []

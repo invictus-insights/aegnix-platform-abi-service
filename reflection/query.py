@@ -206,7 +206,7 @@ def what_preceded_failure(
     This function provides factual context only.
     Interpretation is explicitly left to higher layers.
     """
-    
+
     timeline = get_session_timeline(store, ae_id, session_id)
     records = timeline["records"]
 

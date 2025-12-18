@@ -1,9 +1,10 @@
 # reflection/models.py
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import Optional, Dict, Any, List
 import time
 import uuid
+import  json
 
 
 @dataclass(frozen=True)
@@ -69,3 +70,25 @@ class ReflectionRecord:
     # Lightweight indexing / filtering
     labels: Dict[str, str] = field(default_factory=dict)
 
+
+def serialize_record(record: ReflectionRecord) -> str:
+    """
+    Serialize a ReflectionRecord to JSON for durable storage.
+    Explicit, deterministic, no inference.
+    """
+    return json.dumps(asdict(record), default=str)
+
+
+def deserialize_record(payload: str) -> ReflectionRecord:
+    """
+    Rehydrate a ReflectionRecord from stored JSON.
+    """
+    data = json.loads(payload)
+
+    return ReflectionRecord(
+        **data,
+        correlation=Correlation(**data["correlation"]),
+        transitions=[
+            Transition(**t) for t in data.get("transitions", [])
+        ],
+    )
