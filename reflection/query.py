@@ -17,7 +17,20 @@ def get_records(
     limit: int = 500,
 ) -> List[ReflectionRecord]:
     """
-    Deterministic read of reflection records with optional filters.
+    Deterministically retrieve reflection records with optional filters.
+
+    Guarantees:
+    - Deterministic ordering by timestamp
+    - Read-only, append-only semantics
+    - No inference, aggregation, or interpretation
+    - No policy or correctness evaluation
+
+    Non-Guarantees:
+    - Does not infer causality
+    - Does not evaluate success or failure
+    - Does not apply Swarm Purpose Policy (SPP)
+
+    This is a factual data access primitive.
     """
 
     records: List[ReflectionRecord] = []
@@ -46,7 +59,20 @@ def get_session_timeline(
     session_id: str,
 ) -> dict:
     """
-    Retrieve a deterministic timeline for an AE session.
+    Retrieve a deterministic, ordered timeline for a single AE session.
+
+    Guarantees:
+    - Stable ordering of records by timestamp
+    - Complete inclusion of all observed session events
+    - Explicit session start and end boundaries (best-known)
+
+    Non-Guarantees:
+    - No inference of intent or correctness
+    - No policy alignment evaluation
+    - No assumption of graceful termination
+
+    This function constructs a factual session envelope suitable
+    for higher-level operator or governance analysis.
     """
     return build_session_timeline(store, ae_id, session_id)
 
@@ -56,8 +82,19 @@ def get_sessions_for_ae(
     ae_id: str,
 ) -> List[str]:
     """
-    Return sorted session IDs observed for an AE.
+    Return all distinct session identifiers observed for an AE.
+
+    Guarantees:
+    - Deterministic ordering of session IDs
+    - Based solely on observed correlation data
+
+    Non-Guarantees:
+    - Does not imply session validity or completeness
+    - Does not infer session success or failure
+
+    This function answers "what sessions existed", nothing more.
     """
+
     sessions = set()
 
     for r in store.all():
@@ -73,8 +110,23 @@ def what_happened(
     session_id: str,
 ) -> dict:
     """
-    Return the raw factual record of what occurred during a session.
+    Return the raw, deterministic factual record of a session.
+
+    Guarantees:
+    - Deterministic ordering
+    - Complete inclusion of recorded events
+    - No inference or interpretation
+    - No policy or correctness evaluation
+
+    Non-Guarantees:
+    - Does not explain intent or causality
+    - Does not assess correctness or alignment
+    - Does not recommend action
+
+    This function answers "what happened",
+    not "why it happened" or "what should be done".
     """
+
     timeline = get_session_timeline(store, ae_id, session_id)
 
     return {
@@ -93,8 +145,21 @@ def why_did_it_stop(
     session_id: str,
 ) -> dict:
     """
-    Return the last known state and events for a session.
+    Return the last observed state of a session and its final events.
+
+    Guarantees:
+    - Deterministic selection of the last recorded event
+    - Accurate reporting of final observed transitions
+
+    Non-Guarantees:
+    - Does not assert intent or failure cause
+    - Does not determine responsibility
+    - Does not evaluate policy violations
+
+    This function reports the terminal facts of a session,
+    not an explanation or root-cause analysis.
     """
+
     timeline = get_session_timeline(store, ae_id, session_id)
     records = timeline["records"]
 
@@ -126,8 +191,22 @@ def what_preceded_failure(
     window: int = 5,
 ) -> dict:
     """
-    Return the raw events preceding a failure transition.
+    Return raw events immediately preceding a detected failure transition.
+
+    Guarantees:
+    - Deterministic window selection
+    - Inclusion of only observed historical events
+    - No mutation or reinterpretation of records
+
+    Non-Guarantees:
+    - Does not claim causality
+    - Does not determine fault or misalignment
+    - Does not evaluate policy or correctness
+
+    This function provides factual context only.
+    Interpretation is explicitly left to higher layers.
     """
+    
     timeline = get_session_timeline(store, ae_id, session_id)
     records = timeline["records"]
 

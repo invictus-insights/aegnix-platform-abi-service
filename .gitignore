@@ -2,7 +2,7 @@
 # Runtime artifacts
 # =========================
 logs/
-db/*.db
+#db/*.db
 
 # =========================
 # Development-only folders
