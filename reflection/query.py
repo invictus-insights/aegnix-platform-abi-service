@@ -1,6 +1,6 @@
 # reflection/query.py
 
-from typing import List, Optional
+from typing import List, Optional, Dict
 from reflection.models import ReflectionRecord
 from reflection.store import ReflectionStore
 from reflection.timeline import build_session_timeline
@@ -102,6 +102,39 @@ def get_sessions_for_ae(
             sessions.add(r.correlation.session_id)
 
     return sorted(sessions)
+
+
+def get_sessions_for_ae_by_recency(
+    store: ReflectionStore,
+    ae_id: str,
+) -> List[Dict[str, float]]:
+    """
+    Return sessions observed for an AE, ordered by most recent activity.
+
+    Guarantees:
+    - Ordering by last observed timestamp (desc)
+    - Derived strictly from stored reflection records
+
+    Non-Guarantees:
+    - Does not imply session health, success, or completion
+    - Timestamp reflects observation, not causality
+    """
+
+    sessions: Dict[str, float] = {}
+
+    for r in store.all():
+        corr = r.correlation
+        if corr.ae_id == ae_id and corr.session_id:
+            last = sessions.get(corr.session_id)
+            if last is None or r.ts > last:
+                sessions[corr.session_id] = r.ts
+
+    return [
+        {"session_id": sid, "last_ts": ts}
+        for sid, ts in sorted(
+            sessions.items(), key=lambda x: x[1], reverse=True
+        )
+    ]
 
 
 def what_happened(

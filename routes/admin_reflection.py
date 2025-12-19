@@ -9,23 +9,18 @@ from reflection.query import (
     what_happened,
     why_did_it_stop,
     what_preceded_failure,
+    get_sessions_for_ae_by_recency,
 )
 
 from aegnix_core.storage import load_storage_provider
 from reflection.sqlite_store import SQLiteReflectionStore
 
+
 def reflection_store() -> ReflectionStore:
     return SQLiteReflectionStore(load_storage_provider())
 
-# def get_store() -> ReflectionStore:
-#     base = load_storage_provider()
-#     return SQLiteReflectionStore(base)
-
-# _base_store = load_storage_provider()
-# store = SQLiteReflectionStore(_base_store)
 
 router = APIRouter()
-# store: ReflectionStore = load_storage_provider()
 
 
 @router.get("/aes")
@@ -51,6 +46,26 @@ def list_sessions_for_ae(ae_id: str, store: ReflectionStore = Depends(reflection
     List session IDs observed for a given AE.
     """
     sessions = get_sessions_for_ae(store, ae_id)
+
+    if not sessions:
+        raise HTTPException(status_code=404, detail="No sessions found for AE")
+
+    return {
+        "ae_id": ae_id,
+        "count": len(sessions),
+        "sessions": sessions,
+    }
+
+
+@router.get("/aes/{ae_id}/sessions/recent")
+def list_sessions_for_ae_recent(
+    ae_id: str,
+    store: ReflectionStore = Depends(reflection_store),
+):
+    """
+    List sessions for an AE ordered by most recent activity.
+    """
+    sessions = get_sessions_for_ae_by_recency(store, ae_id)
 
     if not sessions:
         raise HTTPException(status_code=404, detail="No sessions found for AE")
