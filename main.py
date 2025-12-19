@@ -182,9 +182,14 @@ def start_runtime_sweeper(runtime_registry, interval: int = 5):
 async def startup():
     import asyncio
     from reflection.sink import ReflectionSink
-    from reflection.store import InMemoryReflectionStore
+    from reflection.sqlite_store import SQLiteReflectionStore
 
-    reflection_store = InMemoryReflectionStore()
+    _base_store = load_storage_provider()
+    reflection_store = SQLiteReflectionStore(_base_store)
+
+    # from reflection.store import InMemoryReflectionStore
+
+    # reflection_store = InMemoryReflectionStore()
     reflection_sink = ReflectionSink(reflection_store)
 
     # -------------------------------
@@ -193,10 +198,21 @@ async def startup():
     spp = load_spp()
     log.info("[ABI] Swarm Purpose Policy loaded", extra={"spp": spp})
 
+    def make_reflection_handler(reflection_sink):
+        async def _handler(topic, msg):
+            await reflection_sink.on_event(topic, msg)
+
+        return _handler
+
+    handler_runtime = make_reflection_handler(reflection_sink)
+    handler_transition = make_reflection_handler(reflection_sink)
+
     # Subscribe sink to runtime events
     if hasattr(bus, "subscribe"):
-        bus.subscribe("ae.runtime")(lambda t, m: reflection_sink.on_event(t, m))
-        bus.subscribe("abi.runtime.transition")(lambda t, m: reflection_sink.on_event(t, m))
+        bus.subscribe("ae.runtime")(handler_runtime)
+        bus.subscribe("abi.runtime.transition")(handler_transition)
+        # bus.subscribe("ae.runtime")(lambda t, m: reflection_sink.on_event(t, m))
+        # bus.subscribe("abi.runtime.transition")(lambda t, m: reflection_sink.on_event(t, m))
     log.info("ReflectionSink subscribed to ae.runtime and abi.runtime.transition")
 
     subscribe.set_main_loop(asyncio.get_running_loop())

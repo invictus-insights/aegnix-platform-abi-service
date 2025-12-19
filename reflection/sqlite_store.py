@@ -43,16 +43,20 @@ class SQLiteReflectionStore(ReflectionStore):
                 serialize_record(record)
             ),
         )
+        self._storage.flush()
 
     def all(self) -> List[ReflectionRecord]:
-        rows = self._storage.query(
+        cur = self._storage.execute(
             f"""
-            SELECT payload FROM {self._table}
+            SELECT payload
+            FROM {self._table}
             ORDER BY ts ASC
             """
         )
+        rows = cur.fetchall()
 
         return [
-            deserialize_record(row["payload"])
+            deserialize_record(row[0])
             for row in rows
         ]
+

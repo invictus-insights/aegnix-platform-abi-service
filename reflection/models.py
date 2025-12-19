@@ -80,15 +80,17 @@ def serialize_record(record: ReflectionRecord) -> str:
 
 
 def deserialize_record(payload: str) -> ReflectionRecord:
-    """
-    Rehydrate a ReflectionRecord from stored JSON.
-    """
     data = json.loads(payload)
+
+    correlation = Correlation(**data.pop("correlation"))
+
+    transitions = [
+        Transition(**t) for t in data.pop("transitions", [])
+    ]
 
     return ReflectionRecord(
         **data,
-        correlation=Correlation(**data["correlation"]),
-        transitions=[
-            Transition(**t) for t in data.get("transitions", [])
-        ],
+        correlation=correlation,
+        transitions=transitions,
     )
+

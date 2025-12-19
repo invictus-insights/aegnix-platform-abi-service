@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, Depends
 from typing import Optional
 
 from reflection.store import ReflectionStore
@@ -14,15 +14,22 @@ from reflection.query import (
 from aegnix_core.storage import load_storage_provider
 from reflection.sqlite_store import SQLiteReflectionStore
 
-_base_store = load_storage_provider()
-store = SQLiteReflectionStore(_base_store)
+def reflection_store() -> ReflectionStore:
+    return SQLiteReflectionStore(load_storage_provider())
+
+# def get_store() -> ReflectionStore:
+#     base = load_storage_provider()
+#     return SQLiteReflectionStore(base)
+
+# _base_store = load_storage_provider()
+# store = SQLiteReflectionStore(_base_store)
 
 router = APIRouter()
 # store: ReflectionStore = load_storage_provider()
 
 
 @router.get("/aes")
-def list_aes():
+def list_aes(store: ReflectionStore = Depends(reflection_store)):
     """
     List all AE IDs observed in reflection records.
 
@@ -35,11 +42,11 @@ def list_aes():
         if r.correlation.ae_id:
             ae_ids.add(r.correlation.ae_id)
 
-    return {"aes": sorted(ae_ids)}
+    return {"aes": sorted(ae_ids), "count": len(ae_ids)}
 
 
 @router.get("/aes/{ae_id}/sessions")
-def list_sessions_for_ae(ae_id: str):
+def list_sessions_for_ae(ae_id: str, store: ReflectionStore = Depends(reflection_store)):
     """
     List session IDs observed for a given AE.
     """
@@ -50,12 +57,13 @@ def list_sessions_for_ae(ae_id: str):
 
     return {
         "ae_id": ae_id,
+        "count": len(sessions),
         "sessions": sessions,
     }
 
 
 @router.get("/aes/{ae_id}/sessions/{session_id}/timeline")
-def get_timeline(ae_id: str, session_id: str):
+def get_timeline(ae_id: str, session_id: str, store: ReflectionStore = Depends(reflection_store)):
     """
     Retrieve the full deterministic timeline for an AE session.
     """
@@ -68,7 +76,7 @@ def get_timeline(ae_id: str, session_id: str):
 
 
 @router.get("/aes/{ae_id}/sessions/{session_id}/what-happened")
-def operator_what_happened(ae_id: str, session_id: str):
+def operator_what_happened(ae_id: str, session_id: str, store: ReflectionStore = Depends(reflection_store)):
     """
     Operator-facing factual session summary.
     """
@@ -76,7 +84,7 @@ def operator_what_happened(ae_id: str, session_id: str):
 
 
 @router.get("/aes/{ae_id}/sessions/{session_id}/why-stopped")
-def operator_why_stopped(ae_id: str, session_id: str):
+def operator_why_stopped(ae_id: str, session_id: str, store: ReflectionStore = Depends(reflection_store)):
     """
     Explain the last observed state of a session without inference.
     """
@@ -88,6 +96,7 @@ def operator_preceded_failure(
     ae_id: str,
     session_id: str,
     window: int = Query(default=5, ge=1, le=50),
+    store: ReflectionStore = Depends(reflection_store)
 ):
     """
     Retrieve events leading up to a detected failure.
@@ -101,6 +110,7 @@ def query_records(
     session_id: Optional[str] = None,
     event_type: Optional[str] = None,
     limit: int = Query(default=500, ge=1, le=5000),
+    store: ReflectionStore = Depends(reflection_store)
 ):
     """
     Low-level reflection record query.
