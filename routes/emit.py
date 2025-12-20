@@ -58,10 +58,6 @@ from auth import verify_token
 from abi_state import ABIState
 
 
-
-
-# injected by main.py
-# runtime_registry: RuntimeRegistry = cast(RuntimeRegistry, None)
 abi_state: ABIState = cast(ABIState, None)
 session_manager = None
 
@@ -98,15 +94,60 @@ EVENT_RECEIVED = "emit_received"
 @router.post("")
 @router.post("/")
 async def emit_message(req: Request, authorization: str | None = Header(default=None)):
-#async def emit_message(req: Request, authorization: str | None = Header(default=None)):
     """
-    Validate, authenticate, and dispatch a signed envelope from an AE.
+    ABI Emit Endpoint (Phase 3F → Phase 8)
+    -------------------------------------
 
-    Performs full security verification:
-    - JWT token authentication (session-scoped)
-    - Policy, trust, and signature validation
-    - Per-AE session logging for traceability
+    This route handles authenticated, signed messages ("envelopes")
+    from registered Atomic Experts (AEs) wishing to publish data
+    into the AEGNIX mesh.
+
+    ARCHITECTURAL AUTHORITY (Phase 8)
+    ---------------------------------
+    This endpoint is the **sole ingress point** into the AEGNIX mesh.
+
+    • Atomic Experts (AEs) never publish directly to Kafka / Pub/Sub.
+    • The ABI is the authority that validates, audits, and dispatches events.
+    • Mesh transport selection (HTTP, Kafka, Pub/Sub) is owned by the ABI.
+
+    The transport used here represents the **mesh transport** and is invoked
+    only after all trust, policy, and signature checks have passed.
+
+    Local fan-out (SSE / operator / UI) is handled separately via the ABI's
+    local event bus and does NOT represent mesh transport.
+
+    Security Flow
+    -------------
+    1. **JWT Authentication**
+          - Requires a valid Bearer token (issued at AE registration)
+          - Token must include a valid `sub` (AE ID) and `sid` (session ID)
+    2. **Schema Validation**
+          - Incoming payload must form a valid Envelope
+    3. **Policy Enforcement**
+          - ABI verifies the AE is permitted to publish on the given subject
+    4. **Trust Verification**
+          - Producer’s public key must exist and be marked as “trusted”
+    5. **Signature Verification**
+          - ed25519 signature checked against envelope bytes
+    6. **Audit Trail**
+          - Every event (allowed or denied) recorded with AE ID, session ID,
+            subject, reason, and timestamp
+
+    If all checks pass, the envelope is:
+      1) Dispatched through the **mesh transport**, and
+      2) Locally fanned out via the ABI event bus for SSE / observability.
+
+    Audit logs and service logs are written to:
+        • logs/abi_audit.log
+        • logs/abi_service.log
+
+    Raises:
+        HTTPException(401): If the JWT token is missing, expired, or invalid.
+        HTTPException(403): If publishing is blocked by policy or trust rules.
+        HTTPException(400): If signature verification fails.
+        HTTPException(500): For unexpected internal errors.
     """
+
     try:
         # --- JWT Authentication -------------------------------------
         if not authorization or not authorization.lower().startswith("bearer "):
@@ -230,28 +271,15 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
                 source="emit"
             )
 
-        # # --- NEW: runtime registry touch (AE is alive)
-        # if runtime_registry is None:  # type: ignore[truthy-function]
-        #     log.error({
-        #         "event": "runtime_touch_missing",
-        #         "ae_id": ae_id,
-        #         "session_id": session_id,
-        #         "reason": "runtime_registry_is_none"
-        #     })
-        # else:
-        #     runtime_registry.touch(ae_id, session_id=session_id)
-        #     log.info({
-        #         "event": "runtime_touch",
-        #         "ae_id": ae_id,
-        #         "session_id": session_id,
-        #     })
-
         audit.log_event(EVENT_RECEIVED, {
             "ts": now_ts(), "producer": env.producer,
             "session_id": session_id, "subject": env.subject,
             "labels": env.labels
         })
 
+        # NOTE (Phase 8):
+        # This transport is the *mesh transport* selected by the ABI.
+        # AEs never publish to Kafka/PubSub directly; only ABI crosses the trust boundary.
         tx = transport_factory()
         tx.publish(env.subject, env.to_json())
 
