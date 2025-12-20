@@ -17,7 +17,7 @@ class ReflectionSink:
     def __init__(self, store: ReflectionStore):
         self.store = store
 
-    def on_event(self, topic: str, payload: dict):
+    async def on_event(self, topic: str, payload: dict):
         """
         Generic handler for runtime records.
         """
