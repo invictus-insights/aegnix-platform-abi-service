@@ -280,8 +280,15 @@ async def emit_message(req: Request, authorization: str | None = Header(default=
         # NOTE (Phase 8):
         # This transport is the *mesh transport* selected by the ABI.
         # AEs never publish to Kafka/PubSub directly; only ABI crosses the trust boundary.
-        tx = transport_factory()
+        # tx = transport_factory()
+        tx = transport_factory(role="mesh")
         tx.publish(env.subject, env.to_json())
+
+        log.info({
+            "event": "mesh_transport_selected",
+            "transport": tx.name,
+            "class": tx.__class__.__name__,
+        })
 
         log.info({
             "event": "sig_debug",

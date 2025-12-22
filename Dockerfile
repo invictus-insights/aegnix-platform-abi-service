@@ -24,7 +24,7 @@ COPY abi_service/. .
 
 # Install dependencies
 RUN pip install --no-cache-dir --find-links=/app/local_packages \
-    aegnix-core aegnix-abi fastapi uvicorn sqlite-utils pyJWT
+    aegnix-core aegnix-abi fastapi uvicorn sqlite-utils pyJWT  kafka-python
 
 # Start the service
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

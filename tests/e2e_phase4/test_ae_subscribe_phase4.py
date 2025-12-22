@@ -11,12 +11,13 @@ ABI_URL = "http://127.0.0.1:8080"
 # ------------------------------
 # REAL KEYS FROM enroll_ae.py
 # ------------------------------
-
+#
 PHASE4_PUB_PRIV_B64 = "SDzitZgz6q6+SPOo1GgY+kH/zNOXT7KfE02z5RjoT+Y="
 PHASE4_PUB_PUB_B64  = "3d8fET5MrTsf91SIGKx+DvvlcqdL6dTqaC6+7wviMcE="
 
 PHASE4_SUB_PRIV_B64 = "TP2NUtVxbTOfwRA+lom8eNvgP0WIlZ8tNojW+hMhOnU="
-PHASE4_SUB_PUB_B64  = "UH4bURrWmCOqCveUCFuisf5N1NDwnLwsdZ1EpVmqaTw="
+PHASE4_SUB_PUB_B64 = "UH4bURrWmCOqCveUCFuisf5N1NDwnLwsdZ1EpVmqaTw="
+
 
 def b64d(x):
     return base64.b64decode(x)
@@ -79,67 +80,3 @@ def test_ae_subscribe_receive_message():
 
     assert received["msg"] is not None
 
-    # def test_ae_subscribe_receive_message():
-    #     # ---------------- Publisher AE ----------------
-    #     pub = AEClient(
-    #         name="phase4_pub",
-    #         abi_url=ABI_URL,
-    #         keypair={
-    #             "priv": b64d(PHASE4_PUB_PRIV_B64),
-    #             "pub": b64d(PHASE4_PUB_PUB_B64),
-    #         },
-    #         publishes=["fusion.topic"],
-    #         subscribes=[],
-    #         transport="http",
-    #     )
-    #
-    #     # ---------------- Subscriber AE ----------------
-    #     sub = AEClient(
-    #         name="phase4_sub",
-    #         abi_url=ABI_URL,
-    #         keypair={
-    #             "priv": b64d(PHASE4_SUB_PRIV_B64),
-    #             "pub": b64d(PHASE4_SUB_PUB_B64),
-    #         },
-    #         publishes=[],
-    #         subscribes=["fusion.topic"],
-    #         transport="http",
-    #     )
-
-    #
-    # # 1) Register both AEs
-    # assert pub.register_with_abi()
-    # assert sub.register_with_abi()
-    #
-    # # 2) Shared object to capture received message
-    # received = {"msg": None}
-    #
-    # # 3) Start subscriber listen() loop in background thread
-    # def listen_worker():
-    #     for msg in sub.listen():
-    #         received["msg"] = msg
-    #         break   # only need first message
-    #
-    # t = threading.Thread(target=listen_worker, daemon=True)
-    # t.start()
-    #
-    # # Allow SSE connection to establish
-    # time.sleep(0.5)
-    #
-    # # 4) Publisher emits test message
-    # pub.emit("fusion.topic", {"hello": "world"})
-    #
-    # # 5) Wait for subscriber to receive
-    # timeout = time.time() + 5
-    # while time.time() < timeout:
-    #     if received["msg"]:
-    #         break
-    #     time.sleep(0.1)
-    #
-    # # 6) Assertions
-    # assert received["msg"] is not None, "Subscriber should receive the message"
-    #
-    # msg = received["msg"]
-    # assert msg["subject"] == "fusion.topic"
-    # assert msg["producer"] == "phase4_pub"
-    # assert msg["payload"]["hello"] == "world"

@@ -33,6 +33,20 @@ class ABIState:
         # Runtime transitions -> bus
         self.runtime_registry.set_transition_hook(self._on_runtime_transition)
 
+    def _publish_best_effort(self, topic: str, event: dict):
+        import asyncio
+
+        try:
+            loop = asyncio.get_running_loop()
+            loop.create_task(self.bus.publish(topic, event))
+        except RuntimeError:
+            # No running event loop → safe to drop
+            log.debug({
+                "event": "runtime_event_dropped",
+                "topic": topic,
+                "reason": "no_event_loop",
+            })
+
     def _on_runtime_transition(self, evt: dict):
         """
         Runtime lifecycle events.
@@ -49,7 +63,8 @@ class ABIState:
             if hasattr(self.bus, "publish"):
                 # self.bus.publish(topic, evt)
                 if asyncio.iscoroutinefunction(self.bus.publish):
-                    asyncio.create_task(self.bus.publish(topic, evt))
+                    # asyncio.create_task(self.bus.publish(topic, evt))
+                    self._publish_best_effort(topic, evt)
                 else:
                     self.bus.publish(topic, evt)
             elif hasattr(self.bus, "emit"):
@@ -183,7 +198,8 @@ class ABIState:
             # Topic is intentionally generic for now
             # self.bus.publish("ae.runtime", event)
             if asyncio.iscoroutinefunction(self.bus.publish):
-                asyncio.create_task(self.bus.publish("ae.runtime", event))
+                # asyncio.create_task(self.bus.publish("ae.runtime", event))
+                self._publish_best_effort("ae.runtime", event)
             else:
                 self.bus.publish("ae.runtime", event)
 

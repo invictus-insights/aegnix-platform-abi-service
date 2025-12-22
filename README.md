@@ -286,7 +286,7 @@ REGION="us-central1"
 REPO="aegnix-framework"
 IMAGE_NAME="abi-service-alpha"
 SERVICE_NAME="abi-service-alpha"
-TAG="v0.2.2"
+TAG="v0.2.5"
 ```
 
 **Authenticate Docker with Artifact Registry**
@@ -354,9 +354,21 @@ gcloud run deploy $SERVICE_NAME \
 **Deploy to Local Docker Desktop**
 Run from linux local CLI:
 ```bash
-docker build --no-cache -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG -f abi_service/$DOCKERFILE .
+docker build --no-cache \
+  -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG \
+  -f abi_service/$DOCKERFILE .
 
+docker run -p 8080:8080 \
+  -e ABI_JWT_SECRET=change_me \
+  -e ABI_MESH_TRANSPORT=kafka \
+  -e KAFKA_ENABLED=1 \
+  -e KAFKA_BROKERS=kafka:29092 \
+  --network kafka_default \
+  $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG
+  
+OLD --> 
 docker run   -p 8080:8080   -e ABI_JWT_SECRET=change_me   $REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE_NAME:$TAG
+
 
 ```
 
